@@ -1,0 +1,310 @@
+/* Shared lemonade experiment. The original pages live in lemonade-redesign. */
+:root.lemonade-theme {
+  color-scheme: light;
+  --night: #ffe88a;
+  --night-2: #fff5c6;
+  --night-3: #fff9dc;
+  --dusk: #f3cd62;
+  --text: #172e40;
+  --muted: #283f50;
+  --subtle: #2c4251;
+  --lemon: #00445a;
+  --lemon-hover: #00455b;
+  --lemon-ink: #ffffff;
+  --aqua: #00445a;
+  --cyan: #3cc8f2;
+  --cyan-hover: #69d7f5;
+  --line: rgb(22 64 84 / .16);
+  --line-strong: rgb(22 64 84 / .28);
+  --liquid-level: calc(var(--opening-offset, 104px) + 124px);
+}
+.lemonade-theme body { position: relative; isolation: isolate; background: #fff9d6; }
+.lemonade-glass { position: fixed; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; background: linear-gradient(180deg, #fffdf0, #fff7d1 180px); }
+.liquid-body { position: absolute; inset: var(--liquid-level) 0 0; background: linear-gradient(180deg, #ffe88a 0%, #fce276 30%, #f7d461 68%, #ebbf48 100%); }
+.liquid-light { mask-image: linear-gradient(transparent 24px, #000 180px); -webkit-mask-image: linear-gradient(transparent 24px, #000 180px); position: absolute; inset: 0; background: radial-gradient(ellipse at 48% 8%, rgb(255 255 227 / .58), transparent 62%), linear-gradient(100deg, rgb(255 253 224 / .24), transparent 22% 75%, rgb(255 250 195 / .3)); }
+.liquid-body::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, #ffb8cf 0%, #fab0cb 30%, #f5a1c2 68%, #ed91b2 100%); opacity: 0; transition: opacity 6.8s cubic-bezier(.25, .1, .25, 1); }
+.pink-lemonade .liquid-body::after { opacity: 1; }
+.liquid-light, .bubble-field { z-index: 1; }
+.liquid-body { overflow: hidden; }
+/* Keep wave geometry and colors together: the three shapes share one surface. */
+.liquid-surface { position: absolute; inset: calc(var(--liquid-level) - 120px) 0 auto; height: 140px; }
+.liquid-surface svg { display: block; width: 200%; height: 100%; transition: fill 6.8s cubic-bezier(.25, .1, .25, 1); animation: liquid-wave 24s linear infinite; }
+.surface-back { transform: translateY(-12px); }
+.surface-back svg { fill: #f3d668; opacity: .55; animation-duration: 34s; animation-direction: reverse; }
+.surface-middle { transform: translateY(-5px); }
+.surface-middle svg { fill: #fff6bf; animation-duration: 29s; animation-delay: -14s; }
+.surface-front svg { fill: #ffe88a; animation-delay: -6s; }
+.surface-front .wave-edge { fill: none; stroke: rgb(255 255 236 / .65); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+@keyframes liquid-wave { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
+.glass-refraction { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(90deg, rgb(255 255 255 / .68), transparent 1.5%, rgb(255 255 255 / .29) 3%, transparent 5.5% 94.5%, rgb(255 255 255 / .3) 97%, transparent 98.5%, rgb(255 255 255 / .65)); box-shadow: inset 0 -16px 24px -18px rgb(103 80 13 / .32); }
+.glass-refraction::before, .glass-refraction::after { content: ''; position: absolute; top: 1.5%; bottom: 6%; width: 12px; border-radius: 50%; background: linear-gradient(180deg, transparent, rgb(255 255 255 / .62) 20% 65%, transparent); filter: blur(3px); }
+.glass-refraction::before { left: 2.3%; }
+.glass-refraction::after { right: 2.3%; width: 6px; opacity: .7; }
+.bubble-field { position: absolute; inset: 0 0 -100px; overflow: hidden; mask-image: linear-gradient(transparent 0 32px, rgb(0 0 0 / .12) 64px, #000 155px, #000 calc(100% - 110px), transparent); -webkit-mask-image: linear-gradient(transparent 0 32px, rgb(0 0 0 / .12) 64px, #000 155px, #000 calc(100% - 110px), transparent); }
+.bubble-layer { position: absolute; inset: 0; transform: translate3d(var(--bubble-x, 0px), var(--bubble-y, 0px), 0); }
+.lemonade-bubble { position: absolute; left: var(--left); bottom: -80px; width: var(--size); height: var(--size); animation: bubble-rise var(--duration) linear var(--delay) infinite; }
+.bubble-shell { display: block; width: 100%; height: 100%; border: 1px solid rgb(255 255 237 / .8); border-radius: 50%; background: radial-gradient(circle at 28% 23%, rgb(255 255 248 / .86) 0 3%, transparent 9%), radial-gradient(circle at 66% 75%, transparent 42%, rgb(255 255 234 / .28) 70%, rgb(168 129 18 / .1) 100%); box-shadow: inset 1px 2px 3px rgb(255 255 255 / .4), inset -1px -2px 3px rgb(121 101 24 / .12), 0 3px 5px rgb(123 91 12 / .08); animation: bubble-sway var(--sway-time) ease-in-out var(--delay) infinite alternate; }
+.bubbles-far { opacity: .32; }
+.bubbles-mid { opacity: .52; }
+.bubbles-near { opacity: .68; }
+@keyframes bubble-rise { 0% { transform: translate3d(0, 0, 0); opacity: 0; } 7% { opacity: 1; } 70% { opacity: 1; } 90%, 100% { opacity: 0; } 100% { transform: translate3d(0, calc(-100svh - 180px), 0); } }
+@keyframes bubble-sway { from { transform: translateX(calc(var(--sway) * -1)); } to { transform: translateX(var(--sway)); } }
+.lemonade-glass.is-paused *, .lemonade-glass.is-paused svg { animation-play-state: paused; }
+/* The existing UI becomes legible through the pale liquid. */
+.lemonade-theme .concept-bar { padding: 10px 20px; gap: 5px 12px; font-size: clamp(14px, 1vw, 15px); font-weight: 500; line-height: 1.5; background: rgb(255 253 234 / .42); }
+.lemonade-theme .nav { background: transparent; }
+.lemonade-theme.has-scrolled .nav { background: rgb(255 248 207 / .83); border-color: var(--line); }
+.lemonade-theme .logo img, .lemonade-theme .footer-brand img, .lemonade-theme .build-agent img { filter: brightness(0) saturate(100%); opacity: .83; }
+.lemonade-theme .hero, .lemonade-theme .finale, .lemonade-theme #templates, .lemonade-theme #why, .lemonade-theme .footer { background: transparent; }
+.lemonade-theme .hero { padding-bottom: 60px; }
+.lemonade-theme .hero h1, .lemonade-theme h2 { text-shadow: 0 1px 0 rgb(255 253 222 / .26); }
+.lemonade-theme .hero h1 span, .lemonade-theme .finale h2 span { color: #005e79; }
+.lemonade-theme .creators, .lemonade-theme .badge, .lemonade-theme .starter { background: rgb(255 253 227 / .46); }
+.lemonade-theme .creators:hover, .lemonade-theme .badge:hover { border-color: var(--muted); }
+.lemonade-theme .avatars img { border-color: #fff1b1; }
+.lemonade-theme .starter img { filter: brightness(.45); }
+.lemonade-theme .starter:hover { background: rgb(255 253 227 / .75); }
+.lemonade-theme .prompt { background: rgb(255 251 221 / .64); box-shadow: 0 16px 40px -24px rgb(102 76 4 / .4), inset 0 1px 0 rgb(255 255 244 / .72); }
+.lemonade-theme .prompt:focus-within { border-color: var(--cyan); }
+.lemonade-theme .btn-lemon { box-shadow: inset 0 -3px 0 rgb(0 0 0 / .12), 0 10px 22px -15px rgb(38 55 20 / .5); }
+.lemonade-theme .btn-ghost { background: rgb(255 251 221 / .35); }
+.lemonade-theme .btn-ghost:hover { background: rgb(255 251 221 / .65); }
+.lemonade-theme .agent span { color: #fff9d6; }
+.lemonade-theme .scroll-cue { color: #284759; }
+.lemonade-theme .tile-card { border-color: rgb(255 252 228 / .8); box-shadow: 0 20px 40px -22px rgb(109 76 11 / .5); }
+.lemonade-theme .tile-chip { background: #fffcec; color: var(--text); box-shadow: 0 8px 16px -10px rgb(90 64 13 / .45); }
+.lemonade-theme .cover-art { box-shadow: 0 16px 24px -22px rgb(108 82 14 / .45); }
+.lemonade-theme .cover-genre { background: rgb(16 47 66 / .88); }
+.lemonade-theme .cover-icon { background: #ffe58d; }
+.lemonade-theme .stage-visual .build-preview, .lemonade-theme .stage-visual .launch-preview { background: rgb(255 249 215 / .83); }
+.lemonade-theme .play-preview figcaption { background: #fff7cf; }
+.lemonade-theme .stage-visual > :first-child { box-shadow: 0 24px 36px -22px rgb(100 75 15 / .45); }
+.lemonade-theme .stage-float { background: #fffcec; color: var(--text); box-shadow: 0 8px 18px -8px rgb(103 81 22 / .26); }
+.lemonade-theme .stage-float-2 { background: #c6edf8; }
+.lemonade-theme .cities li.next, .lemonade-theme .role-meta li.money { border-color: var(--line-strong); }
+.lemonade-theme .discovery-toast { background: rgb(255 251 221 / .93); box-shadow: 0 8px 24px rgb(107 81 12 / .16); }
+@media (max-width: 760px) {
+  .lemonade-theme .hero { padding-bottom: 32px; }
+  .glass-refraction::before { left: 1%; width: 5px; }
+  .glass-refraction::after { right: 1%; width: 3px; }
+  .bubbles-far .lemonade-bubble:nth-child(n+11), .bubbles-mid .lemonade-bubble:nth-child(n+10), .bubbles-near .lemonade-bubble:nth-child(n+7) { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .liquid-surface svg, .lemonade-bubble, .bubble-shell { animation: none; }
+  .liquid-body::after { transition: none; }
+  .bubble-layer { transform: none; }
+  .lemonade-bubble { bottom: var(--resting-height); opacity: .65; }
+}
+
+/* Cyan is the action accent, with deeper cyan for text on the liquid. */
+.lemonade-theme .btn-lemon, .lemonade-theme .genre-filters button[aria-pressed="true"], .lemonade-theme .seg.together { background: var(--cyan); border-color: transparent; color: #092d42; box-shadow: none; }
+.lemonade-theme .btn-lemon:hover { background: var(--cyan-hover); }
+.lemonade-theme .agent i, .lemonade-theme .agent span { background: var(--cyan); }
+.lemonade-theme .agent span { color: #092d42; }
+.lemonade-theme .idea-preview { color: var(--text); }
+.lemonade-theme .preview-label { color: var(--muted); }
+.lemonade-theme .preview-avatar { color: var(--text); border-color: var(--line-strong); }
+.lemonade-theme .caret { background: var(--aqua); }
+.lemonade-theme .egg-progress { color: var(--aqua); }
+/* A complete, individual card for each game, including the action. */
+.lemonade-theme .game-grid { gap: 24px; align-items: stretch; }
+/* One frosted material for game previews and careers cards in either liquid color. */
+.lemonade-theme .game-cover { display: flex; flex-direction: column; padding: 12px; border-radius: 20px; }
+.lemonade-theme .game-cover,
+.lemonade-theme.careers-page :is(.stat, .fit, .role, .seg) { border: 1px solid rgb(255 255 255 / .58); background: linear-gradient(135deg, rgb(255 255 255 / .28), rgb(255 255 255 / .04) 65%), rgb(255 255 255 / .2); backdrop-filter: blur(18px) saturate(115%); -webkit-backdrop-filter: blur(18px) saturate(115%); box-shadow: inset 0 1px 0 rgb(255 255 255 / .56), inset 0 -1px 0 rgb(255 255 255 / .16), 0 14px 30px -24px rgb(23 46 64 / .3); transition: border-color .2s ease, background-color .2s ease; }
+.lemonade-theme.careers-page :is(.stat-aqua, .seg.together) { background-color: rgb(60 200 242 / .24); }
+.lemonade-theme .game-cover:hover, .lemonade-theme .game-cover:focus-within,
+.lemonade-theme.careers-page :is(.role:hover, .role:focus-within, .stat:focus-within) { border-color: var(--aqua); background-color: rgb(255 255 255 / .32); }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .lemonade-theme .game-cover,
+  .lemonade-theme.careers-page :is(.stat, .fit, .role, .seg) { background-color: rgb(255 255 255 / .76); }
+}
+.lemonade-theme .game-cover .cover-art { flex: none; border-radius: 12px; box-shadow: none; }
+.lemonade-theme .cover-copy { display: flex; flex: 1; flex-direction: column; padding: 18px 10px 10px; }
+.lemonade-theme .cover-copy h3 { color: var(--text); }
+.lemonade-theme .cover-copy p { flex: 1; margin-bottom: 20px; }
+.lemonade-theme .cover-copy button { margin-top: auto; padding: 13px 14px; border: 0; border-radius: 10px; background: #d4f0fa; color: #064b65; }
+.lemonade-theme .cover-copy button:hover { background: var(--cyan); color: #092d42; }
+.lemonade-theme .cover-copy button span[aria-hidden] { color: inherit; }
+.lemonade-theme .cover-icon { background: var(--cyan); }
+/* The hidden pink lemonade pour: a stream, a spreading plume, then a lasting blend. */
+.pink-lemonade .surface-back svg { fill: #ee9ebb; }
+.pink-lemonade .surface-middle svg { fill: #ffdae7; }
+.pink-lemonade .surface-front svg { fill: #ffb8cf; }
+.pink-pour { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+/* Dye is advected through a small fluid field and clipped to the live wave geometry. */
+.pink-fluid { position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%; pointer-events: none; }
+.has-pink-fluid .pink-plume, .has-pink-fluid .pink-spread, .has-pink-fluid .pour-stream, .has-pink-fluid .pour-impact { display: none; }
+@media (prefers-reduced-motion: reduce) { .pink-fluid { display: none; } }
+
+.pour-stream { position: absolute; top: -40px; left: 72%; margin-left: clamp(-11.5px, -.75vw, -7px); width: clamp(14px, 1.5vw, 23px); height: calc(var(--pour-level, var(--liquid-level)) + 44px); border-radius: 0 0 45% 40%; background: linear-gradient(90deg, rgb(173 24 72 / .72), #ef496a 38%, #ff8095 57%, rgb(195 27 80 / .83)); clip-path: polygon(10% 0, 87% 0, 80% 24%, 95% 56%, 72% 82%, 100% 100%, 0 100%, 18% 74%, 5% 45%); transform-origin: 50% 0; opacity: 0; }
+.pour-stream { mask-image: linear-gradient(#000 calc(100% - 26px), transparent); -webkit-mask-image: linear-gradient(#000 calc(100% - 26px), transparent); }
+.pour-impact { position: absolute; top: calc(var(--pour-level, var(--liquid-level)) - 5px); left: 72%; width: 72px; height: 11px; margin-left: -36px; border: 1px solid rgb(237 76 118 / .48); border-radius: 50%; opacity: 0; }
+.pink-plume { position: absolute; z-index: 2; top: calc(var(--pour-level, var(--liquid-level)) - 3px); left: 72%; width: min(620px, 80vw); aspect-ratio: 6 / 7; transform: translateX(-50%); pointer-events: none; }
+.pink-plume svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.dye-ribbon, .dye-clouds { opacity: 0; transform-box: view-box; transform-origin: 300px 0; }
+/* A transparent perimeter prevents the expanding dye from exposing a rectangular edge. */
+.pink-spread { position: absolute; top: 0; left: 72%; width: 160%; height: 120%; z-index: 0; pointer-events: none; background: radial-gradient(ellipse closest-side at 50% 50%, rgb(250 155 188 / .84), rgb(255 181 207 / .56) 36%, rgb(255 181 207 / .18) 62%, rgb(255 181 207 / 0) 88%); opacity: 0; transform: translateX(-50%) scale(.12, .06); transform-origin: 50% 0; }
+.is-pouring .pour-stream { animation: pink-stream 4.4s cubic-bezier(.3, .05, .3, 1) both; }
+.is-pouring .pour-impact { animation: pink-impact 3.4s .65s ease-out both; }
+.is-pouring .dye-ribbon { animation: dye-descend 7.1s .65s cubic-bezier(.18, .55, .3, 1) both; }
+.is-pouring .dye-ribbon-left { animation-delay: 1s; }
+.is-pouring .dye-ribbon-right { animation-delay: 1.3s; }
+.is-pouring .dye-clouds { animation: dye-cloud 7s 1.15s cubic-bezier(.16, 1, .3, 1) both; }
+.is-pouring .pink-spread { animation: dye-spread 7s 1.1s cubic-bezier(.25, .1, .25, 1) both; }
+@keyframes pink-stream {
+  0% { opacity: 0; transform: scaleY(0); }
+  16% { opacity: .95; transform: scaleY(1); }
+  72% { opacity: .85; transform: scaleX(.9); }
+  88% { opacity: .6; transform: scaleX(.6); }
+  100% { opacity: 0; transform: scaleX(.12); }
+}
+@keyframes pink-impact {
+  0% { opacity: 0; transform: scale(.2); }
+  20% { opacity: .5; }
+  100% { opacity: 0; transform: scale(2.6, 1.6); }
+}
+@keyframes dye-descend {
+  0% { opacity: 0; transform: scale(.75, .015); }
+  12% { opacity: .72; transform: scale(.82, .28); }
+  42% { opacity: .62; transform: scale(1, .75); }
+  62% { opacity: .4; transform: scale(1.1, .92); }
+  100% { opacity: 0; transform: translateY(56px) scale(1.35, 1.12); }
+}
+@keyframes dye-cloud {
+  0% { opacity: 0; transform: scale(.2, .14); }
+  30% { opacity: .7; }
+  100% { opacity: 0; transform: translateY(70px) scale(1.6, 1.1); }
+}
+@keyframes dye-spread {
+  0% { opacity: 0; transform: translateX(-50%) scale(.12, .06); }
+  25% { opacity: .8; }
+  70% { opacity: .56; }
+  100% { opacity: 0; transform: translateX(-50%) scale(2, 1.5); }
+}
+.pink-status { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 520px) {
+  .lemonade-theme .game-cover { padding: 10px; }
+  .lemonade-theme .cover-copy { padding: 16px 6px 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .liquid-body::after, .liquid-surface svg { transition-duration: .2s; }
+  .is-pouring .pour-stream, .is-pouring .pour-impact, .is-pouring .dye-ribbon, .is-pouring .dye-clouds, .is-pouring .pink-spread { animation: none; }
+  .lemonade-theme .game-cover, .lemonade-theme.careers-page :is(.stat, .fit, .role, .seg) { transition: none; }
+}
+
+/* Waves retain their document coordinate while sharing the fill's rendering layer. */
+:root.lemonade-theme { --pour-level: max(0px, calc(var(--liquid-level) - var(--page-scroll, 0px) - 64px)); }
+.surface-viewport { position: absolute; inset: 0; overflow: hidden; pointer-events: none; mask-image: linear-gradient(transparent, rgb(0 0 0 / .3) 28px, #000 86px); -webkit-mask-image: linear-gradient(transparent, rgb(0 0 0 / .3) 28px, #000 86px); }
+/* Fade the overlapping wave base into the body so mixing never exposes an SVG edge. */
+.lemonade-surface { position: absolute; top: 0; left: 0; width: 100%; height: calc(var(--liquid-level) + 20px); transform: translate3d(0, calc(-1 * var(--page-scroll, 0px)), 0); overflow: visible; pointer-events: none; mask-image: linear-gradient(#000 calc(100% - 38px), transparent); -webkit-mask-image: linear-gradient(#000 calc(100% - 38px), transparent); }
+.glass-air { position: absolute; inset: 0; background: linear-gradient(180deg, #fff5f8, #ffe4ed 200px); opacity: 0; transition: opacity 6.8s ease; }
+.surface-fill { position: absolute; inset: 0; background: #ffe88a; opacity: var(--surface-immersion, 0); transition: background-color 6.8s cubic-bezier(.25, .1, .25, 1); }
+.pink-lemonade .glass-air { opacity: 1; }
+.pink-lemonade .surface-fill { background-color: #ffb8cf; }
+.lemonade-theme.pink-lemonade .concept-bar { background-color: rgb(255 230 239 / .5); }
+.lemonade-theme.pink-lemonade .nav { background-color: rgb(255 225 236 / .4); }
+.lemonade-theme.pink-lemonade.has-scrolled .nav { background-color: rgb(255 221 233 / .86); }
+.lemonade-theme.pink-mixing .nav, .lemonade-theme.pink-mixing .concept-bar { transition: background-color 6.8s cubic-bezier(.25, .1, .25, 1), border-color .2s ease; }
+
+/* A soft leading edge also stays continuous while the surface scrolls above the header. */
+.liquid-body { --body-top: max(0px, calc(var(--liquid-level) - var(--page-scroll, 0px) - 30px)); top: var(--body-top); mask-image: linear-gradient(transparent, #000 min(12px, var(--body-top))); -webkit-mask-image: linear-gradient(transparent, #000 min(12px, var(--body-top))); }
+.lemonade-surface:not(.is-in-view) svg { animation-play-state: paused; }
+/* Notes rock gently around their tape, keeping the existing tilt and paper perspective. */
+@media (prefers-reduced-motion: no-preference) {
+  .lemonade-theme .note-pocket .sticky { transform-origin: 50% 2px; animation: note-sway var(--note-sway-time, 5.5s) ease-in-out var(--note-sway-delay, -2.5s) infinite alternate; animation-play-state: paused; }
+  .lemonade-theme .note-pocket:nth-child(even) { --note-sway-time: 7s; --note-sway-delay: -4s; }
+  :root.lemonade-theme:not(.scene-paused) .note-pocket:where(.is-in-view[open]:not(:hover):not(:focus-within)) .sticky { animation-play-state: running; }
+  @keyframes note-sway {
+    from { rotate: calc(var(--tilt, -6deg) - 2deg); }
+    to { rotate: calc(var(--tilt, -6deg) + 2deg); }
+  }
+}
+/* Ice stays distributed down the page. Its idle float is lateral, never a rising loop. */
+.ice-field { position: absolute; inset: var(--liquid-level) 0 0; z-index: -1; overflow: clip; pointer-events: none; }
+.ice-anchor { position: absolute; left: var(--ice-left); top: var(--ice-top); width: var(--ice-size); height: var(--ice-size); margin-left: calc(var(--ice-size) / -2); opacity: var(--ice-opacity); rotate: var(--ice-turn); }
+.ice-offset { width: 100%; height: 100%; transform: translate3d(var(--ice-x, 0px), var(--ice-y, 0px), 0); }
+.ice-core { position: relative; width: 100%; height: 100%; border: 1px solid rgb(255 255 255 / .75); border-radius: 24% 29% 23% 20%; background: linear-gradient(135deg, rgb(255 255 255 / .72), rgb(242 253 255 / .16) 38%, rgb(184 228 240 / .2) 65%, rgb(255 255 255 / .53)); box-shadow: inset 5px 7px 8px rgb(255 255 255 / .64), inset -6px -8px 10px rgb(154 199 211 / .28), 7px 12px 18px -14px rgb(46 99 110 / .35); animation: ice-rock var(--ice-time) ease-in-out var(--ice-delay) infinite alternate; animation-play-state: paused; }
+.ice-core::before { content: ''; position: absolute; inset: 9% 15% 17% 10%; border: 1px solid rgb(255 255 255 / .66); border-radius: 23% 28% 21% 18%; background: radial-gradient(ellipse at 30% 30%, rgb(255 255 255 / .5), transparent 60%); }
+.ice-core::after { content: ''; position: absolute; inset: 12% 17% 23% 13%; border-top: 2px solid rgb(255 255 255 / .75); border-right: 1px solid rgb(255 255 255 / .65); border-radius: 18%; transform: skew(-8deg, 6deg); }
+.ice-facet { position: absolute; right: 4%; bottom: 4%; width: 42%; height: 55%; border-radius: 20% 30% 36% 28%; background: linear-gradient(125deg, transparent 20%, rgb(255 255 255 / .72) 48%, rgb(219 246 248 / .08) 54%); }
+.ice-anchor.is-in-view .ice-core { animation-play-state: running; }
+@keyframes ice-rock { from { transform: translateX(-5px) rotate(-2deg); } to { transform: translateX(5px) rotate(2deg); } }
+/* Hero previews sit at different distances behind the glass, and come into focus on hover. */
+.lemonade-theme .collage { perspective: none; }
+.lemonade-theme .tile { --card-z: -80px; --card-blur: .6px; --card-opacity: .85; --card-tint: .14; aspect-ratio: 4 / 3; perspective: 1000px; rotate: none; translate: none; transform: none; opacity: 1; filter: none; transition: none; }
+.lemonade-theme .tile-visual { position: relative; display: block; width: 100%; height: 100%; pointer-events: none; opacity: var(--card-opacity); filter: blur(var(--card-blur)) saturate(.85); transform: translate3d(calc(var(--mx, 0) * var(--d) * 18px), calc(var(--my, 0) * var(--d) * 12px), var(--card-z)) rotate(var(--rot)); transition: transform .5s var(--ease), filter .3s ease, opacity .3s ease; }
+.lemonade-theme .tile-visual * { pointer-events: none; }
+
+.lemonade-theme .t1 { --card-z: -60px; --card-blur: .35px; --card-opacity: .9; --card-tint: .09; }
+.lemonade-theme .t2 { --card-z: -145px; --card-blur: 1.1px; --card-opacity: .76; --card-tint: .2; }
+.lemonade-theme .t3 { --card-z: -105px; --card-blur: .65px; --card-opacity: .84; --card-tint: .14; }
+.lemonade-theme .t4 { --card-z: -35px; --card-blur: .2px; --card-opacity: .94; --card-tint: .07; }
+.lemonade-theme .t5 { --card-z: -230px; --card-blur: 1.8px; --card-opacity: .64; --card-tint: .27; }
+.lemonade-theme .t6 { --card-z: -190px; --card-blur: 1.4px; --card-opacity: .7; --card-tint: .23; }
+.lemonade-theme .tile-card { position: relative; animation: none; scale: 1; transition: none; }
+.lemonade-theme .tile:hover .tile-card, .lemonade-theme .tile:focus-visible .tile-card { scale: 1; }
+@property --glass-tint-light { syntax: '<color>'; inherits: false; initial-value: #fff7c6; }
+@property --glass-tint-deep { syntax: '<color>'; inherits: false; initial-value: #f6cf55; }
+.lemonade-theme .tile-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(140deg, var(--glass-tint-light, #fff7c6), var(--glass-tint-deep, #f6cf55)); opacity: var(--card-tint); pointer-events: none; transition: opacity .3s ease, --glass-tint-light 6.8s ease, --glass-tint-deep 6.8s ease; }
+.pink-lemonade .tile-card::after { --glass-tint-light: #ffd7e6; --glass-tint-deep: #f3a0c0; }
+.lemonade-theme .tile:hover, .lemonade-theme .tile:focus-visible { z-index: 3; }
+.lemonade-theme .tile:hover .tile-visual, .lemonade-theme .tile:focus-visible .tile-visual { transform: translate3d(0, 0, 0) rotate(var(--rot)); filter: none; opacity: 1; animation-play-state: paused; }
+.lemonade-theme .tile:hover .tile-card::after, .lemonade-theme .tile:focus-visible .tile-card::after { opacity: 0; }
+.lemonade-theme .hero-inner { pointer-events: none; }
+.lemonade-theme .hero-copy > *, .lemonade-theme .hero-inner :is(a, button, input, textarea, summary, .note-pocket) { pointer-events: auto; }
+@media (prefers-reduced-motion: no-preference) { .lemonade-theme .tile-visual { animation: card-suspend 8s ease-in-out calc(var(--n, 0) * -1.3s) infinite alternate; } }
+@keyframes card-suspend { from { translate: 0 3px; } to { translate: 0 -5px; } }
+.lemonade-theme .collage:not(.is-in-view) .tile-visual { animation-play-state: paused; }
+/* FIZZ adds a temporary fine carbonation layer without changing the existing bubbles. */
+.fizz-field { position: absolute; inset: 0; z-index: 3; overflow: hidden; pointer-events: none; opacity: 0; mask-image: linear-gradient(transparent 0 20px, rgb(0 0 0 / .15) 55px, #000 125px, #000 calc(100% - 25px), transparent); -webkit-mask-image: linear-gradient(transparent 0 20px, rgb(0 0 0 / .15) 55px, #000 125px, #000 calc(100% - 25px), transparent); }
+.fizz-bubble { position: absolute; left: var(--fizz-left); bottom: -20px; width: var(--fizz-size); height: var(--fizz-size); border: 1px solid rgb(255 255 255 / .9); border-radius: 50%; background: rgb(255 255 245 / .18); box-shadow: inset 1px 1px 1px rgb(255 255 255 / .8); animation: fizz-rise var(--fizz-duration) linear var(--fizz-delay) infinite; }
+.is-fizzing .fizz-field { animation: fizz-envelope 8s ease both; }
+@keyframes fizz-rise { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(14px, calc(-100svh - 60px), 0); } }
+@keyframes fizz-envelope { 0%, 100% { opacity: 0; } 6%, 78% { opacity: .9; } }
+.scene-paused .ice-anchor .ice-core, .scene-paused .lemonade-surface svg, .scene-paused .collage .tile-visual, .scene-paused .fizz-field, .scene-paused .fizz-bubble { animation-play-state: paused; }
+@media (max-width: 760px) {
+  .ice-anchor { width: calc(var(--ice-size) * .66); height: calc(var(--ice-size) * .66); opacity: calc(var(--ice-opacity) * .75); }
+}
+@media (hover: none) {
+  .lemonade-theme .tile-visual { filter: none; opacity: 1; }
+  .lemonade-theme .tile-card::after { opacity: .06; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ice-core, .fizz-bubble, .is-fizzing .fizz-field { animation: none; }
+  .ice-offset { transform: none; }
+  .is-fizzing .fizz-field { opacity: .65; }
+  .fizz-bubble { bottom: var(--fizz-rest); }
+  .lemonade-theme .tile-visual { transform: rotate(var(--rot)); filter: none; opacity: 1; transition: none; animation: none; }
+  .lemonade-theme .tile-card::after { opacity: .06; transition: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-air, .surface-fill, .lemonade-theme.pink-mixing .nav, .lemonade-theme.pink-mixing .concept-bar { transition-duration: .2s; }
+}
+
+/* Editable pink wordmarks occupy exactly the space reserved by the original logos. */
+.pink-wordmark-wrap { position: relative; display: inline-block; vertical-align: middle; line-height: 0; }
+.pink-wordmark { position: absolute; inset: 0; display: flex; align-items: center; gap: 5px; visibility: hidden; color: var(--text); font: 800 20px/1 var(--display); letter-spacing: -.04em; white-space: nowrap; }
+.logo .pink-wordmark { font-size: 22px; }
+.lemonade-theme .pink-wordmark img { width: 1em; height: 1em; flex: none; }
+.pink-lemonade .pink-wordmark-wrap > img, .pink-unshuffling .pink-wordmark-wrap > img { visibility: hidden; }
+.pink-lemonade .pink-wordmark, .pink-unshuffling .pink-wordmark { visibility: visible; }
+@media (max-width: 760px) { .logo .pink-wordmark { font-size: 19px; } }
+
+/* A temporary layer inside the glass; all controls remain in front of it. */
+.ingredient-field { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; mask-image: linear-gradient(#000 72%, transparent 100%); -webkit-mask-image: linear-gradient(#000 72%, transparent 100%); }
+.ingredient-drop { position: absolute; top: 0; display: block; pointer-events: none; }
+.ingredient-art { display: block; width: 100%; height: 100%; object-fit: contain; filter: blur(var(--ingredient-softness, 0px)) drop-shadow(3px 7px 6px rgb(51 85 66 / .14)); }
+@media (prefers-reduced-motion: reduce) { .ingredient-field { display: none; } }
+
+/* Escape reverses the whole drink together, with a shorter, eased return. */
+.pink-resetting .liquid-body::after, .pink-resetting .liquid-surface svg, .pink-resetting .glass-air, .pink-resetting .surface-fill { transition-duration: 1.6s; transition-timing-function: cubic-bezier(.22, 1, .36, 1); }
+.lemonade-theme.pink-resetting .nav, .lemonade-theme.pink-resetting .concept-bar { transition: background-color 1.6s cubic-bezier(.22, 1, .36, 1), border-color .2s ease; }
+.lemonade-theme.pink-resetting .tile-card::after { transition: opacity .3s ease, --glass-tint-light 1.6s cubic-bezier(.22, 1, .36, 1), --glass-tint-deep 1.6s cubic-bezier(.22, 1, .36, 1); }
+@media (prefers-reduced-motion: reduce) {
+  .pink-resetting .liquid-body::after, .pink-resetting .liquid-surface svg, .pink-resetting .glass-air, .pink-resetting .surface-fill, .lemonade-theme.pink-resetting .nav, .lemonade-theme.pink-resetting .concept-bar, .lemonade-theme.pink-resetting .tile-card::after { transition-duration: .2s; }
+}
+
+/* A carried-over drink appears settled immediately on the destination page. */
+.restoring-glass .liquid-body::after, .restoring-glass .liquid-surface svg, .restoring-glass .glass-air, .restoring-glass .surface-fill, .restoring-glass .nav, .restoring-glass .concept-bar, .restoring-glass .tile-card::after { transition: none; }

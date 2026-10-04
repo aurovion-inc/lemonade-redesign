@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en" class="lemonade-theme careers-page">
+<!--
+Lemonade glass experiment. Scope: background and the contrast of existing surfaces.
+THESIS: the viewport is a glass of lemonade; rising bubbles replace the night sky.
+OWN-WORLD: transparent lemon yellow, cyan accents and blue ink, refracted edges, a slow liquid surface.
+STORY: the original game-building and careers content and interactions stay in place.
+FIRST VIEWPORT: the existing centered hero sits beneath a full-width liquid meniscus.
+FORM: user-selected background experiment; existing page composition is retained.
+-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Careers · Lemonade · Redesign concept</title>
+<meta name="description" content="Unofficial redesign concept of the Lemonade careers page: the mission, how the team works, and the open roles.">
+<!-- A concept of someone else's product: keep it out of search results. -->
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#fff9d6">
+<script src="../background-state.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400..700&family=Caveat:wght@500;600;700&display=swap">
+<script src="script.js"></script>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../glass.css">
+<script src="../pink-fluid.js" defer></script>
+<script src="../glass.js" defer></script>
+</head>
+<body>
+<div class="lemonade-glass" aria-hidden="true">
+  <div class="glass-air"></div><div class="surface-fill"></div>
+  <div class="liquid-body"><div class="liquid-light"></div>
+    <div class="pink-spread"></div>
+    <div class="fizz-field"></div>
+    <div class="bubble-field">
+      <div class="bubble-layer bubbles-far" data-bubble-depth="0.25"></div>
+      <div class="bubble-layer bubbles-mid" data-bubble-depth="0.55"></div>
+      <div class="bubble-layer bubbles-near" data-bubble-depth="1"></div>
+    </div>
+  </div>
+  <div class="surface-viewport">
+<div class="lemonade-surface" aria-hidden="true">
+  <div class="liquid-surface surface-back"><svg fill="#f3d668" viewBox="0 0 2880 160" preserveAspectRatio="none" focusable="false"><path d="M0 64 C240 18 480 18 720 64 C960 110 1200 110 1440 64 C1680 18 1920 18 2160 64 C2400 110 2640 110 2880 64 V160 H0Z"/></svg></div>
+  <div class="liquid-surface surface-middle"><svg fill="#fff6bf" viewBox="0 0 2880 160" preserveAspectRatio="none" focusable="false"><path d="M0 64 C240 18 480 18 720 64 C960 110 1200 110 1440 64 C1680 18 1920 18 2160 64 C2400 110 2640 110 2880 64 V160 H0Z"/></svg></div>
+  <div class="liquid-surface surface-front"><svg fill="#ffe88a" viewBox="0 0 2880 160" preserveAspectRatio="none" focusable="false"><path d="M0 64 C240 18 480 18 720 64 C960 110 1200 110 1440 64 C1680 18 1920 18 2160 64 C2400 110 2640 110 2880 64 V160 H0Z"/><path class="wave-edge" fill="none" d="M0 64 C240 18 480 18 720 64 C960 110 1200 110 1440 64 C1680 18 1920 18 2160 64 C2400 110 2640 110 2880 64"/></svg></div>
+</div>
+  </div>
+  <div class="pink-pour">
+    <div class="pink-plume"><svg viewBox="0 0 600 700" preserveAspectRatio="xMidYMin meet" focusable="false">
+      <defs>
+        <linearGradient id="dye-ribbon" x1="0" y1="0" x2=".2" y2="1"><stop stop-color="#cc244f" stop-opacity=".78"/><stop offset=".36" stop-color="#e64376" stop-opacity=".52"/><stop offset="1" stop-color="#f29bb8" stop-opacity="0"/></linearGradient>
+        <radialGradient id="dye-cloud"><stop stop-color="#e9477a" stop-opacity=".38"/><stop offset=".5" stop-color="#ed7299" stop-opacity=".2"/><stop offset="1" stop-color="#f6b4cc" stop-opacity="0"/></radialGradient>
+        <filter id="dye-wisp" x="-25%" y="-15%" width="150%" height="140%"><feTurbulence type="fractalNoise" baseFrequency=".012 .023" numOctaves="2" seed="8" result="flow"/><feDisplacementMap in="SourceGraphic" in2="flow" scale="24" xChannelSelector="R" yChannelSelector="G"/><feGaussianBlur stdDeviation="2.5"/></filter>
+      </defs>
+      <g class="dye-ribbons" fill="url(#dye-ribbon)" filter="url(#dye-wisp)">
+        <path class="dye-ribbon dye-ribbon-main" d="M291 0C286 80 316 126 288 206S220 308 272 395S336 530 279 658L352 662C387 544 315 446 332 358S369 228 328 158S315 46 310 0Z"/>
+        <path class="dye-ribbon dye-ribbon-left" d="M287 94C270 181 274 236 218 283S107 368 142 433S231 498 210 588L277 641C303 526 226 451 209 407S287 311 301 259S315 159 304 103Z"/>
+        <path class="dye-ribbon dye-ribbon-right" d="M310 133C321 210 332 243 379 297S456 385 420 454S355 536 385 651L462 637C437 523 492 474 487 421S429 322 394 272S341 177 331 135Z"/>
+      </g>
+      <g class="dye-clouds" fill="url(#dye-cloud)"><ellipse cx="271" cy="335" rx="190" ry="210"/><ellipse cx="377" cy="482" rx="206" ry="194"/><ellipse cx="176" cy="502" rx="174" ry="166"/></g>
+    </svg></div>
+    <span class="pour-stream"></span><span class="pour-impact"></span>
+  </div>
+</div>
+
+<div class="ice-field" aria-hidden="true"></div>
+<div class="glass-refraction" aria-hidden="true"></div>
+<div class="concept-bar">
+  <span>Unofficial redesign concept by aurovion. Not affiliated with Lemonade Labs, Inc.</span>
+  <a href="https://www.notion.so/Join-Lemonade-3347fbd021e480d58066c1613499bcff" target="_blank" rel="noopener">See the real careers page ↗</a>
+</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="../main/index.html" aria-label="Lemonade home"><img src="https://lemonade.gg/logomark.svg" alt="Lemonade" width="213" height="34"></a>
+    <nav aria-label="Primary">
+      <a href="../main/index.html#templates">Games</a>
+      <a href="../main/index.html#how">How it works</a>
+      <a href="index.html" aria-current="page">Careers</a>
+      <a class="btn btn-lemon btn-sm" href="https://lemonade.gg/sign-in" target="_blank" rel="noopener">Start building</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="top">
+    
+    <div class="hero-inner wrap">
+      <a class="badge rise" style="--i:0" href="#roles"><b>3</b> open roles, always hiring</a>
+      <h1 class="rise" style="--i:1">Help every kid earn <span>their first dollar.</span></h1>
+      <p class="lede rise" style="--i:2">We start with games on Roblox. Next: agents that help teenagers build real businesses online.</p>
+      <div class="actions rise" style="--i:3">
+        <a class="btn btn-lemon" href="#roles">See open roles</a>
+        <a class="btn btn-ghost" href="#rhythm">How we work</a>
+      </div>
+      <a class="scroll-cue" href="#why">Meet the team below<span aria-hidden="true">&#8595;</span></a>
+    </div>
+  </section>
+
+  <section class="section career-notes-section" id="why">
+    <div class="wrap">
+    <p class="story reveal">It started with two teenagers making money online: one ran a Minecraft server that got big, the other shipped Roblox games from school computers. <span>That's when they learned building doesn't need anyone's permission. Lemonade is how more kids get that moment.</span></p>
+    <dl class="plan">
+      <div class="reveal">
+        <dt>Now</dt>
+        <dd><b>Roblox first.</b> 600M players a month, and kids already earn real money there. It's where Lemonade earns the trust of millions of teenagers.</dd>
+      </div>
+      <div class="reveal" style="--i:1">
+        <dt>Next</dt>
+        <dd><b>A bigger lemonade stand.</b> Agents that help teenagers start online businesses of every kind, not only games.</dd>
+      </div>
+    </dl>
+    </div>
+<div class="note-scatter" aria-label="Careers desk notes"><details class="note-pocket"><summary>Bring your side quest.</summary><aside class="sticky sticky-paper " style="--tilt:-6deg"><strong>Bring your side quest.</strong><p>A tiny game. A weird tool. Something you could not stop building.</p><small>Your curiosity deserves a browser tab.</small></aside></details><details class="note-pocket"><summary>The best kind of bug</summary><aside class="sticky sticky-paper sticky-mint" style="--tilt:5deg"><strong>The best kind of bug</strong><p>The one you can reproduce.</p><small>The other kind has excellent hiding skills.</small><button class="egg-button" type="button" data-egg="boss">Find the bug</button><output class="egg-result" aria-live="polite"></output></aside></details></div>
+  </section>
+
+  <section class="section wrap" id="now">
+    <div class="now-head reveal">
+      <h2>A small team <span>with a head start.</span></h2>
+    </div>
+    <div class="stats">
+      <div class="stat reveal"><b>3</b><span>people: two in product, one in growth</span></div>
+      <div class="stat stat-lemon reveal" style="--i:1"><b>Years</b><span>of runway</span></div>
+      <div class="stat stat-aqua reveal" style="--i:2"><b>170K+</b><span>members in the Discord community</span></div>
+      <div class="stat stat-text reveal"><b>The fastest-growing creator tool on Roblox</b><span>Creators turn ideas into playable Roblox games by describing what they want to build. The work spans AI agents, game creation, and making complex tools feel easy to use.</span><a href="../main/index.html#templates" style="margin-top:12px; color:var(--lemon); font-size:15px; font-weight:600; text-decoration:underline; text-underline-offset:4px">Explore the game templates &#8599;</a></div>
+      <div class="stat stat-text reveal" style="--i:1">
+        <b>Backed by a tier-one fund</b>
+        <span>and angels from</span>
+        <ul class="backers">
+          <li>Cursor</li><li>Suno</li><li>Supercell</li><li>Convex</li><li>Disney</li><li>Xbox</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap career-notes-section" id="rhythm">
+    <div class="reveal">
+      <h2>Two weeks together, <span>six weeks heads-down.</span></h2>
+      <p class="section-lede">Every two to three months the team meets in person for a focused sprint of planning and alignment. Then everyone ships from wherever they work best.</p>
+    </div>
+    <div class="cycle reveal" role="img" aria-label="A repeating cycle: two weeks together in person, then about six weeks of focused work from home">
+      <div class="seg together"><b>2 weeks</b><span>Together, in a new city</span></div>
+      <div class="seg apart"><b>About 6 weeks</b><span>Heads-down, from home</span></div>
+      <div class="seg together fade"><b>2 weeks</b><span>Together</span></div>
+      <div class="seg apart fade"><b>6 weeks</b><span>Heads-down</span></div>
+    </div>
+    <ul class="cities reveal">
+      <li>San Francisco</li>
+      <li>Helsinki</li>
+      <li>Berlin</li>
+      <li class="next">Japan, next</li>
+      <li class="note">Every trip is paid for by the company.</li>
+    </ul>
+<div class="note-scatter" aria-label="Careers desk notes"><details class="note-pocket"><summary>Sprint packing list</summary><aside class="sticky sticky-paper sticky-peach" style="--tilt:5deg"><strong>Sprint packing list</strong><p>Laptop. Charger. Headphones. That idea you keep thinking about.</p><small>Especially the charger.</small></aside></details><details class="note-pocket"><summary data-pink-recipe="Pinkade break-time recipe">Break-time recipe</summary><aside class="sticky sticky-paper " style="--tilt:-5deg"><strong data-pink-recipe="Pinkade break-time recipe">Break-time recipe</strong><p data-pink-recipe="Lemon juice + cold water + a splash of cranberry juice. Add sugar to taste, ice, and stir.">Lemon juice + cold water + sugar to taste. Add ice.</p><small data-pink-recipe="A berry-bright break. Your tabs are safe.">A refresh that does not clear your tabs.</small><button class="egg-button" type="button" data-egg="mix">Take a tiny break</button><output class="egg-result" aria-live="polite"></output></aside></details></div>
+  </section>
+
+  <section class="section wrap" id="deal">
+    <div class="reveal">
+      <h2>The deal.</h2>
+    </div>
+    <dl class="deal">
+      <div class="reveal"><dt>Real users</dt><dd>You ship to a product used at scale, not to a pitch deck.</dd></div>
+      <div class="reveal" style="--i:1"><dt>Real pay</dt><dd>A competitive salary, in cash, starting at $150k.</dd></div>
+      <div class="reveal" style="--i:2"><dt>Real equity</dt><dd>0.5% to 2%, a stake that means something if this works.</dd></div>
+      <div class="reveal"><dt>Frontier work</dt><dd>Agents, evals and creative tools, right at the edge of what models can do.</dd></div>
+      <div class="reveal" style="--i:1"><dt>Good trips</dt><dd>Sprints in beautiful places with people who make you sharper.</dd></div>
+      <div class="reveal" style="--i:2"><dt>Little process</dt><dd>No meetings for their own sake. Mostly, you build.</dd></div>
+    </dl>
+    <div class="filter">
+      <div class="fit no reveal">
+        <h3>Probably not for you if</h3>
+        <ul>
+          <li>A strict line between work and life comes first.</li>
+          <li>You're aiming for a big-tech career ladder.</li>
+          <li>You'd rather be told what to build.</li>
+          <li>Building for teenagers doesn't excite you.</li>
+        </ul>
+      </div>
+      <div class="fit yes reveal" style="--i:1">
+        <h3>You'll fit right in if</h3>
+        <ul>
+          <li>You had a side hustle before 18, or wish you had.</li>
+          <li>You want your work in users' hands right away.</li>
+          <li>You think about agents on long walks, for fun.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap career-notes-section" id="roles">
+    <div class="roles-head reveal">
+      <h2>Open roles.</h2>
+      <p class="section-lede">Full-time and hybrid. Apply by email, or send @Reault a message on Discord.</p>
+    </div>
+    <div class="roles">
+      <article class="role reveal">
+        <div class="role-top">
+          <div>
+            <h3>Founding AI Engineer</h3>
+            <ul class="role-meta">
+              <li>Full-time</li>
+              <li>Hybrid, together every 2 to 3 months</li>
+              <li class="money">$150k+</li>
+              <li class="money">0.75% to 2% equity</li>
+            </ul>
+          </div>
+          <a class="btn btn-lemon" href="mailto:nino@lemonade.gg?subject=Founding%20AI%20Engineer">Apply by email</a>
+        </div>
+        <p class="role-summary">Own the agent harness and eval systems behind every game Lemonade makes, and lead a new project: an agent that works on one game for hours, not seconds.</p>
+        <details class="role-more">
+          <summary>What the work looks like</summary>
+          <div class="role-grid">
+            <div>
+              <h4>You'll own</h4>
+              <ul>
+                <li>The agent harness and eval infrastructure, end to end.</li>
+                <li>Testing new frontier and open-source models at launch, and tuning the harness to get the best out of each.</li>
+                <li>Feedback loops that turn real user failures into evals and deterministic checks.</li>
+                <li>A long-horizon project: an agent that builds a solid game scaffold over hours.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>What matters</h4>
+              <ul>
+                <li>You treat the harness as a product, not a thin wrapper around an API.</li>
+                <li>You trust evals, traces and repeated experiments over impressive demos.</li>
+                <li>You move across the whole AI stack, and you can feel when a game loop is off.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>After 3 months</h4>
+              <p>Whole categories of agent mistakes are gone for hundreds of thousands of users, because you caught them and added checks.</p>
+              <h4>Stack</h4>
+              <p>Next.js, Convex, TypeScript. Claude and Cursor Agent SDKs, Fly, Docker.</p>
+            </div>
+          </div>
+        </details>
+      </article>
+
+      <article class="role reveal">
+        <div class="role-top">
+          <div>
+            <h3>Founding Design Engineer</h3>
+            <ul class="role-meta">
+              <li>Full-time</li>
+              <li>Hybrid, together every 2 to 3 months</li>
+              <li class="money">$150k+</li>
+              <li class="money">0.5% to 1.25% equity</li>
+            </ul>
+          </div>
+          <a class="btn btn-lemon" href="mailto:nino@lemonade.gg?subject=Founding%20Design%20Engineer">Apply by email</a>
+        </div>
+        <p class="role-summary">Own everything creators see and touch, and make something very complex feel as easy as play for hundreds of thousands of teenagers.</p>
+        <details class="role-more">
+          <summary>What the work looks like</summary>
+          <div class="role-grid">
+            <div>
+              <h4>You'll own</h4>
+              <ul>
+                <li>The path from idea to published game: onboarding, learning each creator's taste, getting them to a finished game faster.</li>
+                <li>The landing page, and the look and feel of Discord launches.</li>
+                <li>How parallel agents show their work, often a teenager's first close look at AI.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>What matters</h4>
+              <ul>
+                <li>You notice the details most people skip, and they bother you until they're right.</li>
+                <li>You design for flow: the moment the tool disappears and making the game is just fun.</li>
+                <li>You'd rather explore what matters than execute someone else's spec.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>After 3 months</h4>
+              <p>Something you shipped got creators so excited that they brought their friends.</p>
+              <h4>Teams we admire</h4>
+              <p>Flora, Suno, VVD, Remy, Orchids and Manus.</p>
+            </div>
+          </div>
+        </details>
+      </article>
+
+      <article class="role reveal">
+        <div class="role-top">
+          <div>
+            <h3>Frontier Evals Engineer</h3>
+            <ul class="role-meta">
+              <li>Full-time</li>
+              <li>Hybrid, together every 2 to 3 months</li>
+              <li class="money">$150k+</li>
+              <li class="money">0.5% to 1.25% equity</li>
+            </ul>
+          </div>
+          <a class="btn btn-lemon" href="mailto:nino@lemonade.gg?subject=Frontier%20Evals%20Engineer">Apply by email</a>
+        </div>
+        <p class="role-summary">Measure what makes a generated game look and play well, and use it to steer the agent and post-training.</p>
+        <details class="role-more">
+          <summary>What the work looks like</summary>
+          <div class="role-grid">
+            <div>
+              <h4>You'll own</h4>
+              <ul>
+                <li>Hard, useful evals for visuals, gameplay and code.</li>
+                <li>Testing new models at launch, digging into failures, and recommending harness changes.</li>
+                <li>Rubrics and best practices, written with the Roblox expert scripters Lemonade already works with.</li>
+                <li>Sharing promising results with the 170K+ member Discord.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>What matters</h4>
+              <ul>
+                <li>Evidence over vibes: evals, traces and repeated experiments.</li>
+                <li>Judgment about when to use deterministic checks and when to bring in experts.</li>
+                <li>Game taste, and real curiosity about what frontier models can do.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>After 3 months</h4>
+              <p>Your evals catch games that look or play badly, and when a new model ships you can say where it's better and what to change.</p>
+              <h4>Stack</h4>
+              <p>Next.js, Convex, TypeScript. Claude and Cursor Agent SDKs, Fly, Docker.</p>
+            </div>
+          </div>
+        </details>
+      </article>
+    </div>
+<div class="note-scatter" aria-label="Careers desk notes"><details class="note-pocket"><summary>Portfolio reminder</summary><aside class="sticky sticky-paper " style="--tilt:-6deg"><strong>Portfolio reminder</strong><p>Show what you made.<br>Explain what you changed.<br>Tell the interesting bit.</p><small>A working link is a lovely detail.</small></aside></details><details class="note-pocket"><summary>One pixel...</summary><aside class="sticky sticky-paper sticky-mint" style="--tilt:6deg"><strong>One pixel...</strong><p>...can absolutely be the difference.</p><small>You noticed it too, right?</small><button class="egg-button" type="button" data-egg="berry">Nudge it one pixel</button><output class="egg-result" aria-live="polite"></output></aside></details></div>
+  </section>
+
+  <section class="finale career-notes-section" id="apply">
+    
+<div class="gems" aria-hidden="true">
+      <img class="g1" src="https://lemonade.gg/_next/image?url=%2Fvisuals%2Fgems%2F1.webp&w=256&q=75" alt="" loading="lazy">
+      <img class="g2" src="https://lemonade.gg/_next/image?url=%2Fvisuals%2Fgems%2F6.webp&w=256&q=75" alt="" loading="lazy">
+      <img class="g3" src="https://lemonade.gg/_next/image?url=%2Fvisuals%2Fgems%2F2.webp&w=128&q=75" alt="" loading="lazy">
+      <img class="g4" src="https://lemonade.gg/_next/image?url=%2Fvisuals%2Fgems%2F5.webp&w=128&q=75" alt="" loading="lazy">
+      <img class="g5" src="https://lemonade.gg/_next/image?url=%2Fvisuals%2Fgems%2F4.webp&w=128&q=75" alt="" loading="lazy">
+    </div>
+    <div class="wrap finale-inner reveal">
+      <h2>Still reading? <span>Say hi.</span></h2>
+      <p>Lemonade is always hiring. Email <b>nino@lemonade.gg</b> or message <b>@Reault</b> on Discord.</p>
+      <div class="actions">
+        <a class="btn btn-lemon" href="mailto:nino@lemonade.gg">Apply by email</a>
+        <a class="btn btn-ghost" href="https://discord.gg/7btEPHUF4S" target="_blank" rel="noopener">Message on Discord</a>
+      </div>
+    </div>
+<div class="note-scatter" aria-label="Careers desk notes"><details class="note-pocket"><summary>Before you hit send</summary><aside class="sticky sticky-paper sticky-peach" style="--tilt:-5deg"><strong>Before you hit send</strong><p>Check the link.<br>Check the attachment.<br>Check the name.</p><small>Future you says thanks.</small></aside></details><details class="note-pocket"><summary>Your next chapter?</summary><aside class="sticky sticky-paper " style="--tilt:5deg"><strong>Your next chapter?</strong><p>Possibly fewer slides.<br>Hopefully more things you are proud to have made.</p><small>A note to your future self.</small></aside></details></div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <img src="https://lemonade.gg/logomark.svg" alt="Lemonade" width="213" height="34">
+      <p>The first agent for making games on Roblox.</p>
+    </div>
+    <nav aria-label="Follow us">
+      <h4>Follow us</h4>
+      <a href="https://x.com/gg_lemonade" target="_blank" rel="noopener">X (Twitter)</a>
+      <a href="https://discord.gg/7btEPHUF4S" target="_blank" rel="noopener">Discord</a>
+      <a href="https://www.linkedin.com/company/lemonadegg/" target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
+    <nav aria-label="Company">
+      <h4>Company</h4>
+      <a href="index.html" aria-current="page">Careers</a>
+      <a href="https://lemonade.gg/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>
+      <a href="https://lemonade.gg/terms-of-service" target="_blank" rel="noopener">Terms of Service</a>
+    </nav>
+  </div>
+  <div class="wrap footer-base">
+    <span>founders@lemonade.gg - South, Governors Avenue 19904, Delaware, US - © Lemonade Labs, Inc.</span>
+    <span>Unofficial redesign concept by aurovion</span>
+  </div>
+</footer>
+
+
+</body>
+</html>

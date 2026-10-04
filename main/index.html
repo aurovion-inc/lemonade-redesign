@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en" class="lemonade-theme main-page">
+<!--
+Lemonade glass experiment. Scope: background and the contrast of existing surfaces.
+THESIS: the viewport is a glass of lemonade; rising bubbles replace the night sky.
+OWN-WORLD: transparent lemon yellow, cyan accents and blue ink, refracted edges, a slow liquid surface.
+STORY: the original game-building and careers content and interactions stay in place.
+FIRST VIEWPORT: the existing centered hero sits beneath a full-width liquid meniscus.
+FORM: user-selected background experiment; existing page composition is retained.
+-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lemonade · Redesign concept</title>
+<meta name="description" content="Unofficial redesign concept for lemonade.gg, the first agent for making games on Roblox.">
+<!-- A concept of someone else's product: keep it out of search results. -->
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#fff9d6">
+<script src="../background-state.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400..700&family=Caveat:wght@500;600;700&display=swap">
+<script src="script.js"></script>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../glass.css">
+<script src="../pink-fluid.js" defer></script>
+<script src="../glass.js" defer></script>
+</head>
+<body>
+<div class="lemonade-glass" aria-hidden="true">
+  <div class="glass-air"></div><div class="surface-fill"></div>
+  <div class="liquid-body"><div class="liquid-light"></div>
+    <div class="pink-spread"></div>
+    <div class="fizz-field"></div>
+    <div class="bubble-field">
+      <div class="bubble-layer bubbles-far" data-bubble-depth="0.25"></div>
+      <div class="bubble-layer bubbles-mid" data-bubble-depth="0.55"></div>
+      <div class="bubble-layer bubbles-near" data-bubble-depth="1"></div>
+    </div>
+  </div>
+  <div class="surface-viewport">
+<div class="lemonade-surface" aria-hidden="true">
+  <div class="liquid-surface surface-back"><svg fill="#f3d668" viewBox="0 0 2880 160" preserveAspectRatio="none" focusable="false"><path d="M0 64 C240 18 480 18 720 64 C960 110 1200 110 1440 64 C1680 18 1920 18 2160 64 C2400 110 2640 110 2880 64 V160 H0Z"/></svg></div>
+  <div class="liquid-surface surface-middle"><svg fill="#fff6bf" viewBox="0 0 2880 160" preserveAspectRatio="none" focusable="false"><path d="M0 64 C240 18 480 18 720 64 C960 110 1200 110 1440 64 C1680 18 1920 18 2160 64 C2400 110 2640 110 2880 64 V160 H0Z"/></svg></div>
+  <div class="liquid-surface surface-front"><svg fill="#ffe88a" viewBox="0 0 2880 160" preserveAspectRatio="none" focusable="false"><path d="M0 64 C240 18 480 18 720 64 C960 110 1200 110 1440 64 C1680 18 1920 18 2160 64 C2400 110 2640 110 2880 64 V160 H0Z"/><path class="wave-edge" fill="none" d="M0 64 C240 18 480 18 720 64 C960 110 1200 110 1440 64 C1680 18 1920 18 2160 64 C2400 110 2640 110 2880 64"/></svg></div>
+</div>
+  </div>
+  <div class="pink-pour">
+    <div class="pink-plume"><svg viewBox="0 0 600 700" preserveAspectRatio="xMidYMin meet" focusable="false">
+      <defs>
+        <linearGradient id="dye-ribbon" x1="0" y1="0" x2=".2" y2="1"><stop stop-color="#cc244f" stop-opacity=".78"/><stop offset=".36" stop-color="#e64376" stop-opacity=".52"/><stop offset="1" stop-color="#f29bb8" stop-opacity="0"/></linearGradient>
+        <radialGradient id="dye-cloud"><stop stop-color="#e9477a" stop-opacity=".38"/><stop offset=".5" stop-color="#ed7299" stop-opacity=".2"/><stop offset="1" stop-color="#f6b4cc" stop-opacity="0"/></radialGradient>
+        <filter id="dye-wisp" x="-25%" y="-15%" width="150%" height="140%"><feTurbulence type="fractalNoise" baseFrequency=".012 .023" numOctaves="2" seed="8" result="flow"/><feDisplacementMap in="SourceGraphic" in2="flow" scale="24" xChannelSelector="R" yChannelSelector="G"/><feGaussianBlur stdDeviation="2.5"/></filter>
+      </defs>
+      <g class="dye-ribbons" fill="url(#dye-ribbon)" filter="url(#dye-wisp)">
+        <path class="dye-ribbon dye-ribbon-main" d="M291 0C286 80 316 126 288 206S220 308 272 395S336 530 279 658L352 662C387 544 315 446 332 358S369 228 328 158S315 46 310 0Z"/>
+        <path class="dye-ribbon dye-ribbon-left" d="M287 94C270 181 274 236 218 283S107 368 142 433S231 498 210 588L277 641C303 526 226 451 209 407S287 311 301 259S315 159 304 103Z"/>
+        <path class="dye-ribbon dye-ribbon-right" d="M310 133C321 210 332 243 379 297S456 385 420 454S355 536 385 651L462 637C437 523 492 474 487 421S429 322 394 272S341 177 331 135Z"/>
+      </g>
+      <g class="dye-clouds" fill="url(#dye-cloud)"><ellipse cx="271" cy="335" rx="190" ry="210"/><ellipse cx="377" cy="482" rx="206" ry="194"/><ellipse cx="176" cy="502" rx="174" ry="166"/></g>
+    </svg></div>
+    <span class="pour-stream"></span><span class="pour-impact"></span>
+  </div>
+</div>
+
+<div class="ice-field" aria-hidden="true"></div>
+<div class="glass-refraction" aria-hidden="true"></div>
+<div class="concept-bar">
+  <span>Unofficial redesign concept by aurovion. Not affiliated with Lemonade Labs, Inc.</span>
+  <a href="https://lemonade.gg" target="_blank" rel="noopener">See the live site ↗</a>
+</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Lemonade, back to top"><img src="https://lemonade.gg/logomark.svg" alt="Lemonade" width="213" height="34"></a>
+    <nav aria-label="Primary">
+      <a href="#templates">Games</a>
+      <a href="#how">How it works</a>
+      <a href="../careers/index.html">Careers</a>
+      <a class="btn btn-lemon btn-sm" href="https://lemonade.gg/sign-in" target="_blank" rel="noopener">Start building</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="top">
+    
+    <div class="collage" id="collage"></div>
+    <div class="hero-inner wrap">
+      <div class="hero-copy">
+      <a class="creators rise" style="--i:0" href="#community">
+        <span class="avatars">
+          <img src="https://lemonade.gg/_next/image?url=%2Fprofile_pictures%2F1.png&w=96&q=75" alt="" width="26" height="26">
+          <img src="https://lemonade.gg/_next/image?url=%2Fprofile_pictures%2F2.png&w=96&q=75" alt="" width="26" height="26">
+          <img src="https://lemonade.gg/_next/image?url=%2Fprofile_pictures%2F3.png&w=96&q=75" alt="" width="26" height="26">
+        </span>
+        Join 500K+ creators
+      </a>
+      <h1 class="rise" style="--i:1">Build the game <span>only you can imagine.</span></h1>
+      <p class="lede rise" style="--i:2">The first agent for making games on Roblox. Describe an idea, and Lemonade builds it.</p>
+      <form class="prompt rise" style="--i:3" id="prompt" novalidate>
+        <label class="sr-only" for="idea">Describe your game</label>
+        <textarea id="idea" rows="2" placeholder="Make a game where…"></textarea>
+        <div class="prompt-bar">
+          <span class="prompt-hint">Enter to generate, Shift+Enter for a new line</span>
+          <button class="btn btn-lemon" type="submit">Generate</button>
+        </div>
+      </form>
+      <p class="prompt-msg" id="prompt-msg" role="status"></p>
+      <div class="starters rise" style="--i:4" id="starters"></div>
+      </div>
+      <a class="scroll-cue" href="#templates">Scroll to explore<span aria-hidden="true">&#8595;</span></a>
+    </div>
+    <div class="agent" aria-hidden="true"><i></i><span>Lemonade</span></div>
+<div class="note-scatter hero-notes" id="hero-notes" aria-label="Notes from the idea desk"><details class="note-pocket"><summary>A note from Lemonade</summary><figure class="sticky sticky-original" style="--tilt:-5deg"><img src="https://lemonade.gg/_next/image?url=%2Fvisuals%2FNote%25202.webp&w=640&q=75" alt="Original handwritten sticky note from Lemonade" width="384" height="330" loading="lazy"></figure></details><details class="note-pocket"><summary>Important research:</summary><aside class="sticky sticky-paper sticky-mint" style="--tilt:7deg"><strong>Important research:</strong><p>What if the final boss was a lemon?<br>Very bitter. No mercy.</p><small>add to the game ideas pile</small><button class="egg-button" type="button" data-egg="boss">Poke the lemon</button><output class="egg-result" aria-live="polite"></output></aside></details></div>
+  </section>
+
+  <section class="section" id="templates">
+    <div class="wrap section-head reveal">
+      <div>
+        <h2>Start from a game <span>people already love.</span></h2>
+        <p>Twelve starting points. Pick one, then make it yours.</p>
+      </div>
+    </div>
+        <div class="game-library wrap">
+      <div class="library-toolbar">
+        <div class="genre-filters" role="group" aria-label="Filter game ideas">
+          <button type="button" data-genre="all" aria-pressed="true">All games</button>
+          <button type="button" data-genre="build" aria-pressed="false">Build &amp; grow</button>
+          <button type="button" data-genre="action" aria-pressed="false">Action</button>
+          <button type="button" data-genre="explore" aria-pressed="false">Explore</button>
+        </div>
+        <span id="library-count" role="status"></span>
+      </div>
+      <div class="game-grid" id="game-grid"></div>
+      <div class="library-bottom"><p>A starting point, not a limit. Change the rules. Make it yours.</p><button class="btn btn-ghost" type="button" id="show-games" aria-expanded="false" aria-controls="game-grid">Show all 12 games <span aria-hidden="true">&#8595;</span></button></div>
+    </div>
+<div class="note-scatter wrap" aria-label="A recipe and a note from Lemonade"><details class="note-pocket"><summary>Actual lemonade</summary><aside class="sticky sticky-paper" style="--tilt:-7deg"><strong>Actual lemonade</strong><p data-pink-recipe="1/2 cup lemon juice&#10;1 3/4 cups cold water&#10;1/4 cup cranberry juice&#10;3 tbsp sugar + ice.">1/2 cup lemon juice<br>2 cups cold water<br>3 tbsp sugar<br>Ice. Stir. Taste.</p><small data-pink-recipe="Stir. Taste. Adjust sugar.&#10;The berry good remix.">Adjust sugar to taste.<br>Finally, a recipe with no API key.</small><button class="egg-button" type="button" data-egg="mix">Stir the lemonade</button><output class="egg-result" aria-live="polite"></output></aside></details><details class="note-pocket"><summary>A note from Lemonade</summary><figure class="sticky sticky-original" style="--tilt:5deg"><img src="https://lemonade.gg/_next/image?url=%2Fvisuals%2FNote%25201.webp&w=640&q=75" alt="Original handwritten sticky note from Lemonade" width="384" height="335" loading="lazy"></figure></details></div>
+  </section>
+
+  <section class="section wrap" id="how">
+    <div class="how-head reveal">
+      <h2>From an idea to a game <span>you can play.</span></h2>
+    </div>
+    <div class="walkthrough-track">
+    <div class="creation-studio">
+      <div class="studio-viewport">
+      <div class="studio-panel" id="panel-describe" role="region" aria-label="describe stage" tabindex="-1">
+        <div class="studio-copy"><span class="studio-kicker">Your idea is the starting line.</span><h3>Start with<br>a what if.</h3><p>A world, a rule, a wonderfully strange idea. Tell Lemonade what you want to play, in your own words.</p><button class="studio-link" type="button" data-next-step="1">See how it takes shape <span aria-hidden="true">&#8594;</span></button></div>
+        <div class="idea-preview"><div class="preview-label"><span class="preview-avatar">You</span><span>One idea. Endless possibilities.</span></div><blockquote><span id="bubble-text">Make a game where you grow a lemonade stand into a juice empire.</span><span class="caret" aria-hidden="true"></span></blockquote><div class="idea-tags"><span>A tiny stand</span><span>A growing empire</span><span>Your rules</span></div><button class="btn btn-lemon" type="button" data-use="2">Try this idea <span aria-hidden="true">&#8599;</span></button></div>
+      </div>
+      <div class="studio-panel" id="panel-build" role="region" aria-label="build stage" tabindex="-1">
+        <div class="studio-copy"><span class="studio-kicker">Meet your building partner.</span><h3>Give the idea<br>a world.</h3><p>Lemonade gets to work on your idea. The agent turns your description into a Roblox game you can try.</p><button class="studio-link" type="button" data-next-step="2">Take a look inside <span aria-hidden="true">&#8594;</span></button></div>
+        <div class="build-preview"><div class="build-agent"><img src="https://lemonade.gg/icons/logo-icon.svg" alt="" width="32" height="32"><div><strong>Lemonade agent</strong><span>Example: a lemonade stand</span></div></div><ul class="build-checks"><li><span aria-hidden="true">&#10003;</span><div><strong>A place to start</strong><small>The stand, the street, the first customer.</small></div></li><li><span aria-hidden="true">&#10003;</span><div><strong>A reason to keep playing</strong><small>Sell a drink. Earn a little. Grow the stand.</small></div></li><li><span aria-hidden="true">&#10003;</span><div><strong>Room for your ideas</strong><small>New recipes, new upgrades, new possibilities.</small></div></li></ul><p class="preview-caption">An example of how a game idea takes shape.</p></div>
+      </div>
+      <div class="studio-panel" id="panel-play" role="region" aria-label="play stage" tabindex="-1">
+        <div class="studio-copy"><span class="studio-kicker">The fun part starts here.</span><h3>Less imagining.<br>More playing.</h3><p>Step into the game. See what feels fun, find what you want to change, and make the idea more your own.</p><button class="studio-link" type="button" data-next-step="3">Then, let people in <span aria-hidden="true">&#8594;</span></button></div>
+        <figure class="play-preview"><img src="https://lemonade.gg/_next/image?url=%2Fvideos%2F1%2Fsell-lemons.webp&w=640&q=75" alt="Lemonade stand game on Roblox" width="640" height="480" loading="lazy"><figcaption><span>Lemonade stand</span><span>Example game</span></figcaption></figure>
+      </div>
+      <div class="studio-panel" id="panel-launch" role="region" aria-label="launch stage" tabindex="-1">
+        <div class="studio-copy"><span class="studio-kicker">Made to be played.</span><h3>Your game.<br>Their next favorite.</h3><p>Put it on Roblox for everyone to play. Your first business starts with something you made.</p><a class="btn btn-lemon" href="https://lemonade.gg/sign-in" target="_blank" rel="noopener">Start building <span aria-hidden="true">&#8599;</span></a></div>
+        <div class="launch-preview"><img src="https://lemonade.gg/_next/image?url=%2Fvisuals%2Fgems%2F6.webp&w=256&q=75" alt="" width="206" height="204" loading="lazy"><strong>From &ldquo;what if&rdquo;<br>to &ldquo;I made this.&rdquo;</strong><p>Every game starts somewhere.<br>This one starts with you.</p></div>
+      </div>
+      </div>
+    </div>
+    </div>
+<div class="note-scatter wrap" aria-label="Lemonade facts and a drink upgrade">
+    <details class="note-pocket"><summary>A pretty big stand.</summary><aside class="sticky sticky-paper sticky-peach" style="--tilt:5deg"><strong>A pretty big stand.</strong><p>Lemonade's homepage says 500K+ creators.</p><small>That's a lot of imaginary lemons.<br><a href="https://lemonade.gg" target="_blank" rel="noopener">Source: Lemonade</a></small></aside></details>
+    <details class="note-pocket"><summary>Strawberry DLC</summary><aside class="sticky sticky-paper" style="--tilt:-6deg"><strong>Strawberry DLC</strong><p>Mash 4 strawberries into a glass of lemonade. Add mint + ice.</p><small>No battle pass required.</small><button class="egg-button" type="button" data-egg="berry">Install strawberry DLC</button><output class="egg-result" aria-live="polite"></output></aside></details>
+  </div>
+  </section>
+
+  
+  <section class="finale" id="community">
+    
+    <div class="gems" aria-hidden="true">
+      <img class="g1" src="https://lemonade.gg/_next/image?url=%2Fvisuals%2Fgems%2F1.webp&w=256&q=75" alt="" loading="lazy">
+      <img class="g2" src="https://lemonade.gg/_next/image?url=%2Fvisuals%2Fgems%2F6.webp&w=256&q=75" alt="" loading="lazy">
+      <img class="g3" src="https://lemonade.gg/_next/image?url=%2Fvisuals%2Fgems%2F2.webp&w=128&q=75" alt="" loading="lazy">
+      <img class="g4" src="https://lemonade.gg/_next/image?url=%2Fvisuals%2Fgems%2F5.webp&w=128&q=75" alt="" loading="lazy">
+      <img class="g5" src="https://lemonade.gg/_next/image?url=%2Fvisuals%2Fgems%2F4.webp&w=128&q=75" alt="" loading="lazy">
+    </div>
+    <div class="wrap finale-inner reveal">
+      <h2>Your first business <span>starts here.</span></h2>
+      <p>Join 500K+ creators making Roblox games with Lemonade.</p>
+      <div class="actions">
+        <a class="btn btn-lemon" href="https://lemonade.gg/sign-in" target="_blank" rel="noopener">Start building</a>
+        <a class="btn btn-ghost" href="https://discord.gg/7btEPHUF4S" target="_blank" rel="noopener">Join the Discord</a>
+      </div>
+    </div>
+<div class="note-scatter wrap finale-notes" aria-label="One last pair of desk notes"><details class="note-pocket"><summary>A note from Lemonade</summary><figure class="sticky sticky-original" style="--tilt:-4deg"><img src="https://lemonade.gg/_next/image?url=%2Fvisuals%2FNote%25203.webp&w=640&q=75" alt="Original handwritten sticky note from Lemonade" width="384" height="384" loading="lazy"></figure></details><details class="note-pocket"><summary>Behind the lemons</summary><aside class="sticky sticky-paper sticky-mint" style="--tilt:6deg"><strong>Behind the lemons</strong><p>The company name is Lemonade Labs, Inc.</p><small>Lab coat optional. Ideas encouraged.<br><a href="https://lemonade.gg" target="_blank" rel="noopener">Source: Lemonade footer</a></small></aside></details></div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <img src="https://lemonade.gg/logomark.svg" alt="Lemonade" width="213" height="34">
+      <p>The first agent for making games on Roblox.</p>
+    </div>
+    <nav aria-label="Follow us">
+      <h4>Follow us</h4>
+      <a href="https://x.com/gg_lemonade" target="_blank" rel="noopener">X (Twitter)</a>
+      <a href="https://discord.gg/7btEPHUF4S" target="_blank" rel="noopener">Discord</a>
+      <a href="https://www.linkedin.com/company/lemonadegg/" target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
+    <nav aria-label="Company">
+      <h4>Company</h4>
+      <a href="../careers/index.html">Careers</a>
+      <a href="https://lemonade.gg/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>
+      <a href="https://lemonade.gg/terms-of-service" target="_blank" rel="noopener">Terms of Service</a>
+    </nav>
+  </div>
+  <div class="wrap footer-base">
+    <span>founders@lemonade.gg - South, Governors Avenue 19904, Delaware, US - © Lemonade Labs, Inc.</span>
+    <span>Unofficial redesign concept by aurovion</span>
+  </div>
+</footer>
+
+
+</body>
+</html>

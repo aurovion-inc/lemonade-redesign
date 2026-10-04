@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 124" fill="none">
+  <defs>
+    <linearGradient id="leaf" x1="21" y1="23" x2="76" y2="99" gradientUnits="userSpaceOnUse"><stop stop-color="#e0f7c7" stop-opacity=".87"/><stop offset=".3" stop-color="#afe0a7" stop-opacity=".83"/><stop offset=".72" stop-color="#77bb97" stop-opacity=".79"/><stop offset="1" stop-color="#549c87" stop-opacity=".76"/></linearGradient>
+    <linearGradient id="facet" x1="29" y1="25" x2="59" y2="84" gradientUnits="userSpaceOnUse"><stop stop-color="#fcffe6" stop-opacity=".65"/><stop offset="1" stop-color="#faffed" stop-opacity="0"/></linearGradient>
+  </defs>
+  <path d="M51 103C42 102 28 95 23 85L18 80L20 75L15 65L18 60L17 49L22 45L23 34L29 32L33 22L40 21L50 8L59 20L66 22L69 32L76 36L76 46L82 52L80 62L83 70L78 77L77 86C72 97 60 104 51 103Z" fill="url(#leaf)" stroke="#f6ffe3" stroke-opacity=".76" stroke-width="1.25" stroke-linejoin="round"/>
+  <path d="M48 16C29 39 19 71 48 97C39 64 47 31 48 16Z" fill="url(#facet)"/>
+  <path d="M51 116C47 89 49 58 50 20" stroke="#70ac86" stroke-opacity=".85" stroke-width="3" stroke-linecap="round"/>
+  <path d="M50 108C47 79 49 50 50 19" stroke="#ecffda" stroke-opacity=".83" stroke-width="1.5" stroke-linecap="round"/>
+  <g stroke="#e9ffda" stroke-opacity=".62" stroke-width="1.2" stroke-linecap="round">
+    <path d="M49 46Q37 40 34 30M49 61Q33 53 26 43M49 77Q31 69 25 59M49 92Q34 84 28 75"/>
+    <path d="M50 47Q63 41 66 32M49 64Q66 55 74 47M49 79Q65 71 75 62M50 94Q65 88 71 78"/>
+  </g>
+  <path d="M29 48C28 38 34 28 42 22" stroke="#fffef0" stroke-opacity=".64" stroke-width="2.5" stroke-linecap="round"/>
+  <ellipse cx="64" cy="73" rx="3.8" ry="5" transform="rotate(23 64 73)" fill="#f6fff1" fill-opacity=".3" stroke="#fbfff0" stroke-opacity=".72" stroke-width=".8"/>
+</svg>
