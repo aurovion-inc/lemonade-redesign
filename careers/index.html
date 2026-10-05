@@ -2,11 +2,6 @@
 <html lang="en" class="lemonade-theme careers-page">
 <!--
 Lemonade glass experiment. Scope: background and the contrast of existing surfaces.
-THESIS: the viewport is a glass of lemonade; rising bubbles replace the night sky.
-OWN-WORLD: transparent lemon yellow, cyan accents and blue ink, refracted edges, a slow liquid surface.
-STORY: the original game-building and careers content and interactions stay in place.
-FIRST VIEWPORT: the existing centered hero sits beneath a full-width liquid meniscus.
-FORM: user-selected background experiment; existing page composition is retained.
 -->
 <head>
 <meta charset="utf-8">
@@ -85,15 +80,31 @@ FORM: user-selected background experiment; existing page composition is retained
 <main>
   <section class="hero" id="top">
     
-    <div class="hero-inner wrap">
-      <a class="badge rise" style="--i:0" href="#roles"><b>3</b> open roles, always hiring</a>
-      <h1 class="rise" style="--i:1">Help every kid earn <span>their first dollar.</span></h1>
-      <p class="lede rise" style="--i:2">We start with games on Roblox. Next: agents that help teenagers build real businesses online.</p>
-      <div class="actions rise" style="--i:3">
-        <a class="btn btn-lemon" href="#roles">See open roles</a>
-        <a class="btn btn-ghost" href="#rhythm">How we work</a>
+    <!-- Careers stays in the shared glass: mission on the left, real openings on the right. -->
+    <div class="hero-inner wrap career-opening">
+      <div class="career-intro">
+        <a class="badge" href="#roles"><b>3</b> open roles, always hiring</a>
+        <h1>Help every kid earn <span>their first dollar.</span></h1>
+        <p class="lede">We start with games on Roblox. Next: agents that help teenagers build real businesses online.</p>
+        <div class="actions">
+          <a class="btn btn-lemon" href="#roles">See open roles</a>
+          <a class="btn btn-ghost" href="#team">Meet the team</a>
+        </div>
+        <p class="career-opening-note">A small team. A lot to build. Room for your ideas.</p>
       </div>
-      <a class="scroll-cue" href="#why">Meet the team below<span aria-hidden="true">&#8595;</span></a>
+      <aside class="career-invitation" aria-labelledby="invitation-title">
+        <div class="invitation-sheet">
+          <div class="invitation-heading"><span>Lemonade / Careers</span><span aria-hidden="true">&#8599;</span></div>
+          <h2 id="invitation-title">Make the tools.<br><span>They'll make<br>the games.</span></h2>
+          <nav class="invitation-roles" aria-label="Explore an open role">
+            <a href="#role-ai"><span><strong>Founding AI Engineer</strong><small>Agents &amp; infrastructure</small></span><span aria-hidden="true">&#8599;</span></a>
+            <a href="#role-design"><span><strong>Founding Design Engineer</strong><small>The creator experience</small></span><span aria-hidden="true">&#8599;</span></a>
+            <a href="#role-evals"><span><strong>Frontier Evals Engineer</strong><small>Better games, better agents</small></span><span aria-hidden="true">&#8599;</span></a>
+          </nav>
+          <a class="invitation-footer" href="#rhythm"><span>Build from home. Sprint together.</span><span aria-hidden="true">&#8594;</span></a>
+        </div>
+      </aside>
+      <a class="scroll-cue" href="#why">Intrested? Continue reading<span aria-hidden="true">&#8595;</span></a>
     </div>
   </section>
 
@@ -111,7 +122,7 @@ FORM: user-selected background experiment; existing page composition is retained
       </div>
     </dl>
     </div>
-<div class="note-scatter" aria-label="Careers desk notes"><details class="note-pocket"><summary>Bring your side quest.</summary><aside class="sticky sticky-paper " style="--tilt:-6deg"><strong>Bring your side quest.</strong><p>A tiny game. A weird tool. Something you could not stop building.</p><small>Your curiosity deserves a browser tab.</small></aside></details><details class="note-pocket"><summary>The best kind of bug</summary><aside class="sticky sticky-paper sticky-mint" style="--tilt:5deg"><strong>The best kind of bug</strong><p>The one you can reproduce.</p><small>The other kind has excellent hiding skills.</small><button class="egg-button" type="button" data-egg="boss">Find the bug</button><output class="egg-result" aria-live="polite"></output></aside></details></div>
+<div class="note-scatter" aria-label="Careers desk notes"><details class="note-pocket"><summary>Bring your side quest.</summary><aside class="sticky sticky-paper " style="--tilt:-6deg"><img class="note-sticker" src="../assets/stickers/lemon.svg" alt="" aria-hidden="true" width="56" height="56" loading="lazy" decoding="async" style="--sticker-turn:12deg"><strong>Bring your side quest.</strong><p>A tiny game. A weird tool. Something you could not stop building.</p><small>Your curiosity deserves a browser tab.</small></aside></details><details class="note-pocket"><summary>The best kind of bug</summary><aside class="sticky sticky-paper sticky-mint" style="--tilt:5deg"><img class="note-sticker" src="../assets/stickers/lemon-slice.svg" alt="" aria-hidden="true" width="56" height="56" loading="lazy" decoding="async" style="--sticker-turn:-16deg"><strong>The best kind of bug</strong><p>The one you can reproduce.</p><small>The other kind has excellent hiding skills.</small><button class="egg-button" type="button" data-egg="boss">Find the bug</button><output class="egg-result" aria-live="polite"></output></aside></details></div>
   </section>
 
   <section class="section wrap" id="now">
@@ -133,6 +144,29 @@ FORM: user-selected background experiment; existing page composition is retained
     </div>
   </section>
 
+  <section class="section wrap team-section" id="team" aria-labelledby="team-title">
+    <div class="team-heading">
+      <h2 id="team-title">Meet the team.<br><span>Bring your own spark.</span></h2>
+      <p class="section-lede">Get to know the people behind Lemonade. Then show them something you couldn't stop building.</p>
+    </div>
+    <!-- Names and profile links: https://www.linkedin.com/company/lemonadegg/ . No inferred titles or biographies. -->
+    <div class="team-roster">
+      <article class="team-person">
+        <div class="team-monogram" aria-hidden="true"><span>NV</span></div>
+        <div class="team-person-copy"><h3>Nicolas Vizioli</h3><a href="https://www.linkedin.com/in/nicolasvizioli" target="_blank" rel="noopener">Meet Nicolas <span aria-hidden="true">&#8599;</span></a></div>
+      </article>
+      <article class="team-person">
+        <div class="team-monogram" aria-hidden="true"><span>SA</span></div>
+        <div class="team-person-copy"><h3>Simon Andersen</h3><a href="https://se.linkedin.com/in/simon-andersen-913083230" target="_blank" rel="noopener">Meet Simon <span aria-hidden="true">&#8599;</span></a></div>
+      </article>
+      <article class="team-person">
+        <div class="team-monogram" aria-hidden="true"><span>JP</span></div>
+        <div class="team-person-copy"><h3>Juha Paananen</h3><a href="https://de.linkedin.com/in/juha-paananen" target="_blank" rel="noopener">Meet Juha <span aria-hidden="true">&#8599;</span></a></div>
+      </article>
+    </div>
+    <div class="team-next"><p>Your next introduction could start with something you've made.</p><a class="btn btn-ghost" href="#roles">Find your role <span aria-hidden="true">&#8594;</span></a></div>
+  </section>
+
   <section class="section wrap career-notes-section" id="rhythm">
     <div class="reveal">
       <h2>Two weeks together, <span>six weeks heads-down.</span></h2>
@@ -151,7 +185,7 @@ FORM: user-selected background experiment; existing page composition is retained
       <li class="next">Japan, next</li>
       <li class="note">Every trip is paid for by the company.</li>
     </ul>
-<div class="note-scatter" aria-label="Careers desk notes"><details class="note-pocket"><summary>Sprint packing list</summary><aside class="sticky sticky-paper sticky-peach" style="--tilt:5deg"><strong>Sprint packing list</strong><p>Laptop. Charger. Headphones. That idea you keep thinking about.</p><small>Especially the charger.</small></aside></details><details class="note-pocket"><summary data-pink-recipe="Pinkade break-time recipe">Break-time recipe</summary><aside class="sticky sticky-paper " style="--tilt:-5deg"><strong data-pink-recipe="Pinkade break-time recipe">Break-time recipe</strong><p data-pink-recipe="Lemon juice + cold water + a splash of cranberry juice. Add sugar to taste, ice, and stir.">Lemon juice + cold water + sugar to taste. Add ice.</p><small data-pink-recipe="A berry-bright break. Your tabs are safe.">A refresh that does not clear your tabs.</small><button class="egg-button" type="button" data-egg="mix">Take a tiny break</button><output class="egg-result" aria-live="polite"></output></aside></details></div>
+<div class="note-scatter" aria-label="Careers desk notes"><details class="note-pocket"><summary>Sprint packing list</summary><aside class="sticky sticky-paper sticky-peach" style="--tilt:5deg"><img class="note-sticker" src="../assets/stickers/lemon.svg" alt="" aria-hidden="true" width="56" height="56" loading="lazy" decoding="async" style="--sticker-turn:19deg"><strong>Sprint packing list</strong><p>Laptop. Charger. Headphones. That idea you keep thinking about.</p><small>Especially the charger.</small></aside></details><details class="note-pocket"><summary data-pink-recipe="Pinkade break-time recipe">Break-time recipe</summary><aside class="sticky sticky-paper " style="--tilt:-5deg"><img class="note-sticker" src="../assets/stickers/lemon.svg" alt="" aria-hidden="true" width="56" height="56" loading="lazy" decoding="async" style="--sticker-turn:-9deg"><strong data-pink-recipe="Pinkade break-time recipe">Break-time recipe</strong><p data-pink-recipe="Lemon juice + cold water + a splash of cranberry juice. Add sugar to taste and plenty of ice.">Lemon juice + cold water + sugar to taste. Add ice.</p><small data-pink-recipe="A berry-bright break. Your tabs are safe.">A refresh that does not clear your tabs.</small></aside></details></div>
   </section>
 
   <section class="section wrap" id="deal">
@@ -193,7 +227,7 @@ FORM: user-selected background experiment; existing page composition is retained
       <p class="section-lede">Full-time and hybrid. Apply by email, or send @Reault a message on Discord.</p>
     </div>
     <div class="roles">
-      <article class="role reveal">
+      <article class="role reveal" id="role-ai">
         <div class="role-top">
           <div>
             <h3>Founding AI Engineer</h3>
@@ -237,7 +271,7 @@ FORM: user-selected background experiment; existing page composition is retained
         </details>
       </article>
 
-      <article class="role reveal">
+      <article class="role reveal" id="role-design">
         <div class="role-top">
           <div>
             <h3>Founding Design Engineer</h3>
@@ -280,7 +314,7 @@ FORM: user-selected background experiment; existing page composition is retained
         </details>
       </article>
 
-      <article class="role reveal">
+      <article class="role reveal" id="role-evals">
         <div class="role-top">
           <div>
             <h3>Frontier Evals Engineer</h3>
@@ -324,17 +358,17 @@ FORM: user-selected background experiment; existing page composition is retained
         </details>
       </article>
     </div>
-<div class="note-scatter" aria-label="Careers desk notes"><details class="note-pocket"><summary>Portfolio reminder</summary><aside class="sticky sticky-paper " style="--tilt:-6deg"><strong>Portfolio reminder</strong><p>Show what you made.<br>Explain what you changed.<br>Tell the interesting bit.</p><small>A working link is a lovely detail.</small></aside></details><details class="note-pocket"><summary>One pixel...</summary><aside class="sticky sticky-paper sticky-mint" style="--tilt:6deg"><strong>One pixel...</strong><p>...can absolutely be the difference.</p><small>You noticed it too, right?</small><button class="egg-button" type="button" data-egg="berry">Nudge it one pixel</button><output class="egg-result" aria-live="polite"></output></aside></details></div>
+<div class="note-scatter" aria-label="Careers desk notes"><details class="note-pocket"><summary>Portfolio reminder</summary><aside class="sticky sticky-paper " style="--tilt:-6deg"><img class="note-sticker" src="../assets/stickers/lemon-slice.svg" alt="" aria-hidden="true" width="56" height="56" loading="lazy" decoding="async" style="--sticker-turn:12deg"><strong>Portfolio reminder</strong><p>Show what you made.<br>Explain what you changed.<br>Tell the interesting bit.</p><small>A working link is a lovely detail.</small></aside></details><details class="note-pocket"><summary>One pixel...</summary><aside class="sticky sticky-paper sticky-mint" style="--tilt:6deg"><img class="note-sticker" src="../assets/stickers/lemon.svg" alt="" aria-hidden="true" width="56" height="56" loading="lazy" decoding="async" style="--sticker-turn:-16deg"><strong>One pixel...</strong><p>...can absolutely be the difference.</p><small>You noticed it too, right?</small><button class="egg-button" type="button" data-egg="berry">Nudge it one pixel</button><output class="egg-result" aria-live="polite"></output></aside></details></div>
   </section>
 
   <section class="finale career-notes-section" id="apply">
     
 <div class="gems" aria-hidden="true">
-      <img class="g1" src="https://lemonade.gg/_next/image?url=%2Fvisuals%2Fgems%2F1.webp&w=256&q=75" alt="" loading="lazy">
-      <img class="g2" src="https://lemonade.gg/_next/image?url=%2Fvisuals%2Fgems%2F6.webp&w=256&q=75" alt="" loading="lazy">
-      <img class="g3" src="https://lemonade.gg/_next/image?url=%2Fvisuals%2Fgems%2F2.webp&w=128&q=75" alt="" loading="lazy">
-      <img class="g4" src="https://lemonade.gg/_next/image?url=%2Fvisuals%2Fgems%2F5.webp&w=128&q=75" alt="" loading="lazy">
-      <img class="g5" src="https://lemonade.gg/_next/image?url=%2Fvisuals%2Fgems%2F4.webp&w=128&q=75" alt="" loading="lazy">
+      <span class="coin g1" data-depth="1.3"><span class="coin-visual"><img src="https://lemonade.gg/_next/image?url=%2Fvisuals%2Fgems%2F1.webp&w=256&q=75" alt="" loading="lazy"></span></span>
+      <span class="coin g2" data-depth="0.6"><span class="coin-visual"><img src="https://lemonade.gg/_next/image?url=%2Fvisuals%2Fgems%2F6.webp&w=256&q=75" alt="" loading="lazy"></span></span>
+      <span class="coin g3" data-depth="0.45"><span class="coin-visual"><img src="https://lemonade.gg/_next/image?url=%2Fvisuals%2Fgems%2F2.webp&w=128&q=75" alt="" loading="lazy"></span></span>
+      <span class="coin g4" data-depth="1.05"><span class="coin-visual"><img src="https://lemonade.gg/_next/image?url=%2Fvisuals%2Fgems%2F5.webp&w=128&q=75" alt="" loading="lazy"></span></span>
+      <span class="coin g5" data-depth="0.3"><span class="coin-visual"><img src="https://lemonade.gg/_next/image?url=%2Fvisuals%2Fgems%2F4.webp&w=128&q=75" alt="" loading="lazy"></span></span>
     </div>
     <div class="wrap finale-inner reveal">
       <h2>Still reading? <span>Say hi.</span></h2>
@@ -344,7 +378,7 @@ FORM: user-selected background experiment; existing page composition is retained
         <a class="btn btn-ghost" href="https://discord.gg/7btEPHUF4S" target="_blank" rel="noopener">Message on Discord</a>
       </div>
     </div>
-<div class="note-scatter" aria-label="Careers desk notes"><details class="note-pocket"><summary>Before you hit send</summary><aside class="sticky sticky-paper sticky-peach" style="--tilt:-5deg"><strong>Before you hit send</strong><p>Check the link.<br>Check the attachment.<br>Check the name.</p><small>Future you says thanks.</small></aside></details><details class="note-pocket"><summary>Your next chapter?</summary><aside class="sticky sticky-paper " style="--tilt:5deg"><strong>Your next chapter?</strong><p>Possibly fewer slides.<br>Hopefully more things you are proud to have made.</p><small>A note to your future self.</small></aside></details></div>
+<div class="note-scatter" aria-label="Careers desk notes"><details class="note-pocket"><summary>Before you hit send</summary><aside class="sticky sticky-paper sticky-peach" style="--tilt:-5deg"><img class="note-sticker" src="../assets/stickers/lemon.svg" alt="" aria-hidden="true" width="56" height="56" loading="lazy" decoding="async" style="--sticker-turn:19deg"><strong>Before you hit send</strong><p>Check the link.<br>Check the attachment.<br>Check the name.</p><small>Future you says thanks.</small></aside></details><details class="note-pocket"><summary>Your next chapter?</summary><aside class="sticky sticky-paper " style="--tilt:5deg"><img class="note-sticker" src="../assets/stickers/lemon-slice.svg" alt="" aria-hidden="true" width="56" height="56" loading="lazy" decoding="async" style="--sticker-turn:-9deg"><strong>Your next chapter?</strong><p>Possibly fewer slides.<br>Hopefully more things you are proud to have made.</p><small>A note to your future self.</small></aside></details></div>
   </section>
 </main>
 

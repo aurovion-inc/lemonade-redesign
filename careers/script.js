@@ -31,8 +31,8 @@ const skyMotion = matchMedia("(prefers-reduced-motion: reduce)");
 const finePointer = matchMedia("(pointer: fine)");
 const skyScenes = [...document.querySelectorAll(".hero, .finale")].map(section => ({
   section, x: 0, y: 0,
-  layers: [...section.querySelectorAll(".gems img")].map((element, index) => ({
-    element, depth: Number(element.dataset.depth || (0.75 + (index % 3) * 0.3)), x: 0, y: 0
+  layers: [...section.querySelectorAll('.gems .coin')].map(coin => ({
+    element: coin.querySelector('.coin-visual'), depth: Number(coin.dataset.depth), x: 0, y: 0
   }))
 }));
 let skyFrame = 0;
@@ -115,7 +115,6 @@ updateScrollCue();
 // Small discoveries: every interaction also works with a keyboard and reduced motion.
 const eggLines = {
   boss: ['Found it: the bug only appears on Fridays.', 'Plot twist: it was a timezone bug.', 'Regression test added. Tiny victory dance unlocked.'],
-  mix: ['Shoulders down. Unclench your jaw.', 'Look away from the screen for a moment.', 'Refresh complete. Your tabs survived.'],
   berry: ['One pixel right. Much better.', 'One pixel left. Just checking.', 'Perfect. Now test it on mobile.']
 };
 // Feedback stays on the note; each third step earns a small completion mark.

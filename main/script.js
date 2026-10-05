@@ -278,8 +278,8 @@ const skyMotion = matchMedia("(prefers-reduced-motion: reduce)");
 const finePointer = matchMedia("(pointer: fine)");
 const skyScenes = [...document.querySelectorAll(".hero, .finale")].map(section => ({
   section, x: 0, y: 0,
-  layers: [...section.querySelectorAll(".gems img")].map((element, index) => ({
-    element, depth: Number(element.dataset.depth || (0.75 + (index % 3) * 0.3)), x: 0, y: 0
+  layers: [...section.querySelectorAll('.gems .coin')].map(coin => ({
+    element: coin.querySelector('.coin-visual'), depth: Number(coin.dataset.depth), x: 0, y: 0
   }))
 }));
 let skyFrame = 0;
@@ -383,7 +383,6 @@ updateScrollCue();
 // Small discoveries: every interaction also works with a keyboard and reduced motion.
 const eggLines = {
   boss: ['The lemon is mildly annoyed. Boss HP: 2/3.', 'Critical squeeze! Boss HP: 1/3.', 'Boss defeated. Loot: one very dramatic lemonade.'],
-  mix: ['Stirring... the sugar is considering its options.', 'One more stir. No lumps left behind.', 'Lemonade unlocked! +10 refreshment.'],
   berry: ['Strawberry DLC installed. Fresh fruit, coming in.', 'Mint expansion unlocked. Extremely fancy.', 'All upgrades acquired. Please enjoy your beverage.']
 };
 // Feedback stays on the note; each third step earns a small completion mark.

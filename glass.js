@@ -7,6 +7,7 @@
   // Stable placement means a resize doesn't scramble or restart the bubbles.
   let seed = 3719;
   const random = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+  const bubbles = [];
   const layers = [...glass.querySelectorAll('.bubble-layer')].map((element, index) => {
     const count = [18, 14, 9][index];
     const fragment = document.createDocumentFragment();
@@ -28,6 +29,7 @@
       const shell = document.createElement('i');
       shell.className = 'bubble-shell';
       bubble.append(shell);
+      bubbles.push({ element: bubble, depth: Number(element.dataset.bubbleDepth), animation: null, rate: 1 });
       fragment.append(bubble);
     }
     element.append(fragment);
@@ -66,31 +68,50 @@
     document.querySelectorAll('.note-pocket').forEach(note => observer.observe(note));
     observer.observe(document.querySelector('.lemonade-surface'));
     observer.observe(document.querySelector('.collage') || document.querySelector('.hero'));
+    document.querySelectorAll('.finale').forEach(section => observer.observe(section));
   } else {
-    document.querySelectorAll('.ice-anchor, .lemonade-surface, .collage, .note-pocket').forEach(element => element.classList.add('is-in-view'));
+    document.querySelectorAll('.ice-anchor, .lemonade-surface, .collage, .hero, .finale, .note-pocket').forEach(element => element.classList.add('is-in-view'));
   }
+  // The scroll current changes the speed of existing rise animations, not their phase.
+  // A small transient offset adds drag; nothing intercepts normal page scrolling.
   let targetX = 0, targetY = 0, scrollDepth = 0, frame = 0, lastTime = 0;
+  let previousScroll = Math.max(0, scrollY), lastScrollTime = 0, scrollImpulse = 0, flow = 0;
+  const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
+  function setRiseRate(bubble, rate) {
+    if (!bubble.animation) bubble.animation = bubble.element.getAnimations?.().find(animation => animation.animationName === 'bubble-rise');
+    if (!bubble.animation || (Math.abs(rate - bubble.rate) < .03 && rate !== 1) || rate === bubble.rate) return;
+    if (bubble.animation.updatePlaybackRate) bubble.animation.updatePlaybackRate(rate);
+    else bubble.animation.playbackRate = rate;
+    bubble.rate = rate;
+  }
   function requestFrame() {
     if (!frame && !motion.matches && !document.hidden) frame = requestAnimationFrame(update);
   }
   function update(time) {
     frame = 0;
-    const ease = 1 - Math.exp(-Math.min(time - lastTime || 16, 64) / 130);
+    const dt = Math.min(time - lastTime || 16, 64);
+    const ease = 1 - Math.exp(-dt / 130);
     lastTime = time;
-    let settling = false;
+    const flowTarget = time - lastScrollTime < 90 ? scrollImpulse : 0;
+    flow += (flowTarget - flow) * (1 - Math.exp(-dt / 220));
+    if (!flowTarget && Math.abs(flow) < .05) flow = 0;
+    let settling = Math.abs(flowTarget - flow) > .05 || flow !== 0;
     for (const layer of layers) {
-      const x = targetX * 23 * layer.depth;
-      const y = (targetY * 16 - scrollDepth) * layer.depth;
+      const x = (targetX * 23 + flow * .22) * layer.depth;
+      const y = (targetY * 16 - scrollDepth - flow * .32) * layer.depth;
       layer.x += (x - layer.x) * ease;
       layer.y += (y - layer.y) * ease;
       layer.element.style.setProperty('--bubble-x', `${layer.x.toFixed(2)}px`);
       layer.element.style.setProperty('--bubble-y', `${layer.y.toFixed(2)}px`);
       if (Math.abs(x - layer.x) + Math.abs(y - layer.y) > .1) settling = true;
     }
+    for (const bubble of bubbles) {
+      setRiseRate(bubble, flow === 0 ? 1 : clamp(1 + flow * .065 * bubble.depth, -.8, 5.5));
+    }
     for (const item of ice) {
       const rect = item.anchor.getBoundingClientRect();
       if (rect.bottom < -100 || rect.top > innerHeight + 100) continue;
-      const depthOffset = Math.max(-1, Math.min(1, (innerHeight / 2 - rect.top - rect.height / 2) / innerHeight));
+      const depthOffset = clamp((innerHeight / 2 - rect.top - rect.height / 2) / innerHeight, -1, 1);
       const x = targetX * 21 * item.depth;
       const y = (targetY * 10 + depthOffset * 36) * item.depth;
       item.x += (x - item.x) * ease;
@@ -101,14 +122,21 @@
     }
     if (settling) requestFrame();
   }
-  function onScroll() {
+  function onScroll(event) {
     // Use one scroll coordinate for the waves and their fill, avoiding a compositor seam.
-    const pageScroll = Math.max(0, scrollY);
-    root.style.setProperty('--page-scroll', `${pageScroll}px`);
-    const submerged = Math.max(0, Math.min(1, (pageScroll - surfaceLevel + 180) / 150));
-    root.style.setProperty('--surface-immersion', submerged * submerged * (3 - 2 * submerged));
     const travel = Math.max(1, document.documentElement.scrollHeight - innerHeight);
-    scrollDepth = Math.max(0, Math.min(1, scrollY / travel)) * 160;
+    const pageScroll = clamp(scrollY, 0, travel);
+    const now = performance.now();
+    if (event?.type === 'scroll' && !motion.matches && !document.hidden) {
+      const elapsed = clamp(now - lastScrollTime, 16, 80);
+      scrollImpulse = clamp((pageScroll - previousScroll) / elapsed * 28, -85, 85);
+      lastScrollTime = now;
+    }
+    previousScroll = pageScroll;
+    root.style.setProperty('--page-scroll', `${pageScroll}px`);
+    const submerged = clamp((pageScroll - surfaceLevel + 180) / 150, 0, 1);
+    root.style.setProperty('--surface-immersion', submerged * submerged * (3 - 2 * submerged));
+    scrollDepth = pageScroll / travel * 160;
     requestFrame();
   }
   addEventListener('scroll', onScroll, { passive: true });
@@ -129,6 +157,10 @@
     glass.classList.toggle('is-paused', document.hidden || motion.matches);
     root.classList.toggle('scene-paused', document.hidden || motion.matches);
     cancelAnimationFrame(frame); frame = 0; lastTime = 0;
+    scrollImpulse = flow = 0;
+    bubbles.forEach(bubble => setRiseRate(bubble, 1));
+    // CSS recreates animations when a reduced-motion preference is switched off.
+    bubbles.forEach(bubble => { bubble.animation = null; bubble.rate = 1; });
     if (motion.matches) {
       layers.forEach(layer => {
         layer.x = layer.y = 0;
@@ -147,6 +179,40 @@
   motion.addEventListener('change', syncMotion);
   addEventListener('pageshow', onScroll);
   syncMotion();
+})();
+
+// Condensation follows the document, concentrated along the outside edges of the glass.
+// Size the static field once; native page scrolling needs no per-frame JavaScript.
+(() => {
+  if (!document.querySelector('.glass-refraction')) return;
+  let seed = 8213;
+  const random = () => ((seed = seed * 16807 % 2147483647) - 1) / 2147483646;
+  const field = document.createElement('div');
+  field.className = 'glass-condensation';
+  field.setAttribute('aria-hidden', 'true');
+  const fragment = document.createDocumentFragment();
+  const pageHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight, innerHeight);
+  const count = Math.min(720, Math.max(110, Math.ceil(pageHeight / Math.max(innerHeight, 600)) * 72));
+  for (let i = 0; i < count; i++) {
+    const drop = document.createElement('i');
+    drop.className = 'dew-drop';
+    const nearEdge = i % 7 !== 6;
+    const edge = 1.5 + Math.pow(random(), 1.6) * 20;
+    const x = nearEdge ? (i % 2 ? 100 - edge : edge) : 22 + random() * 56;
+    const size = 3 + Math.pow(random(), 2) * 18;
+    const props = {
+      '--dew-x': `${x.toFixed(2)}%`,
+      '--dew-y': `${((i + random()) / count * 100).toFixed(2)}%`,
+      '--dew-size': `${size.toFixed(2)}px`,
+      '--dew-height': `${(size * (i % 9 === 0 ? 1.75 : 1.08 + random() * .3)).toFixed(2)}px`,
+      '--dew-angle': `${(-16 + random() * 32).toFixed(2)}deg`,
+      '--dew-opacity': (nearEdge ? .28 + random() * .43 : .16 + random() * .18).toFixed(2)
+    };
+    Object.entries(props).forEach(([name, value]) => drop.style.setProperty(name, value));
+    fragment.append(drop);
+  }
+  field.append(fragment);
+  document.body.append(field);
 })();
 
 // Hidden discoveries: type PINK or FIZZ outside editable fields.
@@ -211,6 +277,8 @@
   function clearFizz(persist = true) {
     clearTimeout(fizzTimer); fizzTimer = 0;
     glass.classList.remove('is-fizzing');
+    root.classList.remove('fizz-active');
+    root.style.removeProperty('--fizz-shake-delay');
     fizzField.style.removeProperty('animation-delay');
     fizzField.replaceChildren();
     if (persist) background.set({ fizzUntil: 0 });
@@ -236,6 +304,8 @@
     fizzField.style.animationDelay = `${-Math.max(0, 8000 - remaining)}ms`;
     void fizzField.offsetWidth;
     glass.classList.add('is-fizzing');
+    root.style.setProperty('--fizz-shake-delay', `${-Math.max(0, 8000 - remaining)}ms`);
+    root.classList.add('fizz-active');
     status.textContent = 'Extra fizz. A sparkling lemonade.';
     background.set({ fizzUntil: deadline });
     fizzTimer = setTimeout(clearFizz, remaining);
